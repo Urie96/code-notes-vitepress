@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-notes-vitepress
+  labels:
+    app: code-notes-vitepress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: code-notes-vitepress
+  template:
+    metadata:
+      labels:
+        app: code-notes-vitepress
+    spec:
+      containers:
+        - name: code-notes-vitepress
+          image: hub.lubui.com/code-notes-vitepress:latest
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: code-notes-vitepress
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: code-notes-vitepress
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: code-notes-vitepress
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - v2.lubui.com
+      secretName: tls-lubui.com
+  rules:
+    - host: v2.lubui.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: code-notes-vitepress
+                port:
+                  number: 80
