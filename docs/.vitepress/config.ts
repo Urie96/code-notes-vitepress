@@ -9,7 +9,7 @@ export default async () => {
     const highlighter = await highlight('dark-plus')
     return defineConfig({
         outDir: '../dist',
-        title: '杨氏笔记',
+        title: 'LUBUI',
         description: ' ',
         lang: 'zh-CN',
         lastUpdated: true,
