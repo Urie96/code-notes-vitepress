@@ -6,7 +6,7 @@ tags: [Javascript, WebCrawler]
 ---
 
 ::: tip
-由于 JavaScript 异步 IO 的特性，使得它在单线程内就可以并发发起很多条网络请求，但这样不加以限制地发请求可能会造成服务器瘫痪或者网关拒绝服务，所以这里就需要对网络请求的并发度进行控制
+由于 Javascript 异步 IO 的特性，使得它在单线程内就可以并发发起很多条网络请求，但这样不加以限制地发请求可能会造成服务器瘫痪或者网关拒绝服务，所以这里就需要对网络请求的并发度进行控制
 :::
 
 <!-- more -->
@@ -29,11 +29,7 @@ function asyncPool(routineCount) {
   return {
     todo(func) {
       return new Promise((resolve, reject) => {
-        todoPool.push(() =>
-          func()
-            .then(resolve)
-            .catch(reject)
-        );
+        todoPool.push(() => func().then(resolve).catch(reject));
         handle();
       });
     },

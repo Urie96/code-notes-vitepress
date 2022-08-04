@@ -1,8 +1,8 @@
 ---
-title: 在 VS Code 中开启 JavaScript 的类型推导
+title: 在 VS Code 中开启 Javascript 的类型推导
 date: 2020-12-15
 categories: [前端]
-tags: [VSCode, JavaScript]
+tags: [VSCode, Javascript]
 ---
 
 ## Type Checking in VS Code

@@ -1,18 +1,16 @@
 ---
-layout: home
-
-hero:
-  name: VitePress
-  text: Vite & Vue powered static site generator.
-  tagline: Lorem ipsum...
-  image:
-    src: /logo.png
-    alt: VitePress
-  actions:
-    - theme: brand
-      text: Get Started
-      link: /guide/what-is-vitepress
-    - theme: alt
-      text: View on GitHub
-      link: https://github.com/vuejs/vitepress
+layout: page
+sidebar: false
+heroText: Young's Code Notes
+bgImageStyle:
+  height: 'calc(100vh - 3.6rem)'
+permalink: ':regular'
+tagline: A ship in harbor is safe, but that is not what ships are built for
+# heroImage: /bg.svg
 ---
+
+<script setup>
+import HomePage from '.vitepress/theme/components/HomePage.vue'
+</script>
+
+<HomePage />

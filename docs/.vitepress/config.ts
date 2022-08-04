@@ -1,13 +1,14 @@
-import { defineConfig } from 'vitepress';
+import { UserConfig, DefaultTheme } from 'vitepress';
 import Token from 'markdown-it/lib/token'
 import container from 'markdown-it-container'
 import fs from 'fs';
 import fm from 'front-matter';
+import fg from 'fast-glob';
 import { highlight } from './highlight';
 
 export default async () => {
-    const highlighter = await highlight('dark-plus')
-    return defineConfig({
+    const pageData = await getPageData()
+    return {
         outDir: '../dist',
         title: 'LUBUI',
         description: ' ',
@@ -21,7 +22,7 @@ export default async () => {
                         tokens[idx].nesting === 1 ? `<div class="custom-block row">\n` : `</div>\n`
                 })
             },
-            highlight: highlighter,
+            highlight: (await highlight('dark-plus')),
         },
         // ignoreDeadLinks: true,
         head: [
@@ -36,7 +37,9 @@ export default async () => {
             ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
         ],
         themeConfig: {
-            siteTitle: '杨氏笔记',
+            author: '杨锐',
+            authorAvatar: '/avatar.svg',
+            siteTitle: 'LUBUI',
             logo: '/favicon.svg',
             lastUpdatedText: '最近更新于',
             outlineTitle: '本页目录',
@@ -51,41 +54,91 @@ export default async () => {
                 apiKey: 'db89e85da0a58d7078b240288ca7e81d',
                 indexName: 'code_notes'
             },
-            sidebar: sidebar(),
+            sidebar: getSidebar(pageData.pages),
+            pageData: pageData,
             nav: [
-                { text: 'vuepress版本', link: 'https://lubui.com' },
+                { text: '分类', items: pageData.categories.map((v: any) => ({ text: v.name, link: `/categories/?category=${v.name}` })) },
+                { text: '标签', link: '/tags/' },
+                { text: '时间线', link: '/timeline/' },
+                { text: '老版本', link: 'https://lubui.com' },
             ]
         }
-    })
-
-
+    } as UserConfig<DefaultTheme.Config>
 }
 
 
 
-function sidebar() {
-    const sidebars: any = []
-    const root = './docs/'
-    fs.readdirSync(root, { withFileTypes: true }).forEach(dir => {
-        if (dir.isDirectory()) {
-            const dirPath = root + dir.name
-            const files = fs.readdirSync(dirPath).filter(file => file.endsWith('.md'))
-            const items = files.map(file => {
-                const fileName = file.replace('.md', '')
-                const { attributes }: any = fm(fs.readFileSync(dirPath + '/' + file, 'utf8'))
-                return {
-                    text: attributes.title || fileName,
-                    link: '/' + dir.name + '/' + fileName,
-                    date: Date.parse(attributes.date)
-                }
-            }).sort((a, b) => a.date - b.date)
-            if (items.length) {
-                sidebars.push({
-                    text: dir.name,
-                    items: items
+function getSidebar(pages: any) {
+    const categories: any = {};
+
+    pages.forEach((v: any) => {
+        const sideBarItem = {
+            text: v.title || '未命名文件',
+            link: v.link,
+            date: v.date,
+        };
+        (v.categories || []).forEach((cate: any) => {
+            categories[cate] = categories[cate] || []
+            categories[cate].push(sideBarItem)
+        });
+    })
+    const sidebars: any = [];
+    for (const cate in categories) {
+        sidebars.push({
+            text: cate,
+            items: categories[cate].sort((a: any, b: any) => b.date - a.date)
+        })
+    }
+    sidebars.sort((a: any, b: any) => b.items[0].date - a.items[0].date)
+    return sidebars
+}
+
+async function getPageData() {
+    const filePathList = await fg('./docs/**/*.md')
+    const getLink = (str: string) => {
+        return str.substring('./docs'.length, str.length - '.md'.length)
+    }
+    const pages = filePathList.map(filePath => {
+        const { attributes }: any = fm(fs.readFileSync(filePath, 'utf8'))
+        if (attributes.layout === 'page') {
+            return
+        }
+        return {
+            categories: [],
+            tags: [],
+            ...attributes,
+            link: getLink(filePath),
+            date: Date.parse(attributes.date)
+        }
+    }).filter(v => v).sort((a, b) => b.date - a.date);
+
+    const categories: any = []
+    const tags: any = []
+
+    pages.forEach(v => {
+        v.categories.forEach((cateName: string) => {
+            const category = categories.filter((v: any) => v.name === cateName)?.[0]
+            if (category) {
+                category.num++
+            } else {
+                categories.push({
+                    name: cateName,
+                    num: 1
                 })
             }
-        }
+        });
+        v.tags.forEach((tagName: string) => {
+            const tag = tags.filter((v: any) => v.name === tagName)?.[0]
+            if (tag) {
+                tag.num++
+            } else {
+                tags.push({
+                    name: tagName,
+                    num: 1
+                })
+            }
+        });
     })
-    return sidebars
+
+    return { categories, tags, pages }
 }

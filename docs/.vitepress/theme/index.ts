@@ -1,30 +1,20 @@
 import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
+import MyLayout from './components/MyLayout.vue';
 import Badge from './components/Badge.vue'
-import './index.stylus'
+import RecoIcon from './components/RecoIcon.vue'
+import ModuleTransition from './components/ModuleTransition.vue'
+import './styles/index.styl'
 
 
 const theme: Theme = {
     ...DefaultTheme,
     enhanceApp: ({ app }) => {
         app.component('Badge', Badge)
-    }
-    // Layout: MyLayout
-    // enhanceApp: ({ app }) => {
-    //     app.mixin({
-    //         created: function () {
-    //             console.log(1, this);
-    //             var myOption = this.$options.myOption
-    //             if (myOption) {
-    //                 console.log(myOption)
-    //             }
-    //         }
-    //     })
-    // }
-    // enhanceApp({ app }) {
-    //     // register global components
-    //     app.component('MyGlobalComponent', /* ... */)
-    // }
+        app.component('reco-icon', RecoIcon)
+        app.component('ModuleTransition', ModuleTransition)
+    },
+    Layout: MyLayout,
 }
 
 export default theme

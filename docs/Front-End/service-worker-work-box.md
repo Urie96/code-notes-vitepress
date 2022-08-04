@@ -2,7 +2,7 @@
 title: Service Worker 与 Work Box 的入门实践
 date: 2020-12-24 11:14:37 GMT+0800
 categories: [前端]
-tags: [JavaScript]
+tags: [Javascript]
 ---
 
 ::: tip
@@ -167,7 +167,8 @@ module.exports = {
       exclude: [/\.gz$/],
       runtimeCaching: [
         {
-          urlPattern: /https:\/\/(cdn|static001\.geekbang\.org|s0\.lgstatic\.com)/,
+          urlPattern:
+            /https:\/\/(cdn|static001\.geekbang\.org|s0\.lgstatic\.com)/,
           handler: 'CacheFirst',
           options: {
             cacheableResponse: {

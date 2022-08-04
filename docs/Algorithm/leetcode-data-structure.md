@@ -2,7 +2,7 @@
 title: LeetCode中链表与树的生成与打印
 date: 2020-12-23 10:09:53 GMT+0800
 categories: [算法]
-tags: [JavaScript]
+tags: [Javascript]
 ---
 
 ::: tip

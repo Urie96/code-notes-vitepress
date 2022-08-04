@@ -3,7 +3,7 @@ title: 编写 Webpack Loader 与 Plugin
 date: 2020-12-14
 categories:
   - 前端
-tags: [Webpack, JavaScript]
+tags: [Webpack, Javascript]
 ---
 
 ## Write a Loader

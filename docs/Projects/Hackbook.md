@@ -2,7 +2,7 @@
 title: Hackbook
 date: 2020-12-04 17:30:04 GMT+0800
 categories: [项目]
-tags: [JavaScript, Node, WebCrawler, SSO, Webpack, Vue, Nginx, Docker]
+tags: [Javascript, Node, WebCrawler, SSO, Webpack, Vue, Nginx, Docker]
 ---
 
 ::: tip

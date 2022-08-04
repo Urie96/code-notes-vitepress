@@ -2,7 +2,7 @@
 title: 将文件的 Data URI 复制到剪切板
 date: 2020-12-01
 categories: [其它]
-tags: [JavaScript]
+tags: [Javascript]
 ---
 
 ::: tip
