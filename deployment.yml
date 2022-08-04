@@ -41,10 +41,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - v2.lubui.com
+        - lubui.com
       secretName: tls-lubui.com
   rules:
-    - host: v2.lubui.com
+    - host: lubui.com
       http:
         paths:
           - path: /

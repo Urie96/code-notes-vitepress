@@ -74,7 +74,7 @@ const router = useRouter();
 
 const recoShowModule = ref(false);
 
-const { frontmatter, theme, page, site } = useData();
+const { frontmatter, theme } = useData();
 const state = reactive({
   recoShow: false,
   heroHeight: 0,
@@ -86,7 +86,7 @@ const bgImageStyle = {
   textAlign: 'center',
   overflow: 'hidden',
   background: `url(/bg.svg) center/cover no-repeat`,
-  height: 'calc(100vh - 3.6rem)',
+  height: 'calc(60vh)',
 };
 
 onMounted(() => {
@@ -136,7 +136,6 @@ ul
   padding: 0;
   margin: 0px auto;
   .hero {
-    margin $navbarHeight auto 0
     position relative
     box-sizing border-box
     padding 0 20px

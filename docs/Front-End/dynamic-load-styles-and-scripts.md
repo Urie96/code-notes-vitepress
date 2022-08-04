@@ -5,7 +5,7 @@ categories: [前端]
 tags: [Javascript, Webpack]
 ---
 
-::: tip
+::: abstract
 webpack 打包时一般下会把所有依赖打包到`vendor.js`中，导致这个文件通常比较大，并且如果依赖有更改，整个`vendor.js`也会改变，不利于缓存。所以 webpack 提供了 external 配置，可以不打包指定的依赖，我们就可以在`index.html`中通过 CDN 来加载依赖。但有些依赖并不总是需要的，所以就需要动态地来拉取 CDN。
 :::
 

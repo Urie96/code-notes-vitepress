@@ -5,7 +5,7 @@ categories: [网络编程]
 tags: [Linux, C]
 ---
 
-::: tip
+::: abstract
 主进程负责循环调用`accept()`来处理每个新 TCP 连接，对每个 TCP 连接，fork 一个子进程专门处理字节流。
 :::
 

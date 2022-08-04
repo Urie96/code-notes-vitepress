@@ -5,7 +5,7 @@ categories: [后端]
 tags: [Golang, Linux]
 ---
 
-::: tip
+::: abstract
 通常服务启动后就会一直在前台运行，或者使用`nohup <command> &`在后台运行，但还是不太优雅，可以实现像`nginx`一样运行一下就在后台启动了。
 :::
 

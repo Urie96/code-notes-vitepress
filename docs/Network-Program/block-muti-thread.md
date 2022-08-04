@@ -5,7 +5,7 @@ categories: [网络编程]
 tags: [Linux, C]
 ---
 
-::: tip
+::: abstract
 从多线程 TCP 服务端，到简易的多线程 HTTP 服务端，再到线程池的 HTTP 服务端。
 :::
 

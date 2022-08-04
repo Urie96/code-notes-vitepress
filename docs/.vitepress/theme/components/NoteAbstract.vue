@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import NoteAbstractItem from './NoteAbstractItem.vue';
 import Pagination from './Pagination.vue';
 import { setStoragePage, getStoragePage } from '../utils/';
@@ -54,11 +54,13 @@ onMounted(() => {
   currentPage.value = getStoragePage() || 1;
 });
 
-// watch: {
-//   $route() {
-//     this.currentPage = this._getStoragePage() || 1;
-//   },
-// },
+watch(
+  () => props.data,
+  () => {
+    console.log(currentPage.value);
+    currentPage.value = 1;
+  }
+);
 </script>
 
 <style lang="stylus" scoped>

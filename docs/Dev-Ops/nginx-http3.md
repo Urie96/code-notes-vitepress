@@ -5,7 +5,7 @@ categories: [运维]
 tags: []
 ---
 
-::: tip
+::: abstract
 HTTP/3 目前还处于试验性阶段，只能使用 nginx 单独的 quic 分支进行编译，还需要安装 Google 自己的 SSL 协议 boringssl，这个 SSL 才内置了谷歌的 QUIC 协议。
 :::
 

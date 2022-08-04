@@ -5,7 +5,7 @@ categories: [后端]
 tags: [websocket]
 ---
 
-::: tip
+::: abstract
 记录如何使用 mitmproxy 抓包 ssl 的 websocket
 :::
 
@@ -37,7 +37,7 @@ $ tree
 ```html
 <script>
   var ws = new WebSocket('wss://sweetlove.top:3000');
-  ws.onopen = function() {
+  ws.onopen = function () {
     let i = 0;
     setInterval(() => {
       ws.send(i++);

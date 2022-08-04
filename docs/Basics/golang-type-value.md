@@ -5,7 +5,7 @@ categories: [基础]
 tags: [Golang]
 ---
 
-::: tip
+::: abstract
 暂未完成
 :::
 

@@ -5,7 +5,7 @@ categories: [项目]
 tags: [Javascript, Node, WebCrawler, SSO, Webpack, Vue, Nginx, Docker]
 ---
 
-::: tip
+::: abstract
 [极客时间](https://time.geekbang.org/)及[拉勾教育](https://kaiwu.lagou.com/)两大知识付费平台的所有付费专栏(_仅供个人学习使用_)。
 :::
 

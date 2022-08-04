@@ -22,11 +22,11 @@
     <ul class="social-links">
       <li
         class="social-item"
-        v-for="(item, index) in theme.socialLinks"
+        v-for="(item, index) in theme.personalInfoSocialLinks"
         :key="index"
       >
         <reco-icon
-          :icon="'reco-' + item.icon"
+          :icon="item.icon"
           :link="item.link"
           :style="{ color: 'rgb(244, 126, 96)' }"
         />

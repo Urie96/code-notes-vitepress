@@ -1,5 +1,5 @@
 export const getStoragePage = () => {
-    const path = window.location.pathname
+    const path = window.location.pathname + window.location.search
     const currentPage = JSON.parse(sessionStorage.getItem('currentPage') || 'null')
 
     if (currentPage === null || path !== currentPage.path) {
@@ -11,7 +11,7 @@ export const getStoragePage = () => {
 }
 
 export const setStoragePage = (page: any) => {
-    const path = window.location.pathname
+    const path = window.location.pathname + window.location.search
     sessionStorage.setItem('currentPage', JSON.stringify({ page, path }))
 }
 

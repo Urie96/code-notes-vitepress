@@ -5,7 +5,7 @@ categories: [其它]
 tags: [Linux]
 ---
 
-::: tip
+::: abstract
 由于某种神奇之力，许多国外网站无法登录，比如 Google 搜索不能访问、Google 扩展商店不能进入、Golang 官方包不能下载、Kubernetes 不能安装。所以选择搭建 SSR 解决这个问题。
 :::
 

@@ -5,7 +5,7 @@ categories: [区块链]
 tags: [BlockChain, Ethereum]
 ---
 
-::: tip
+::: abstract
 以太坊的特色之一是可以部署智能合约，从而构建去中心化应用。
 :::
 

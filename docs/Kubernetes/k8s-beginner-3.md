@@ -5,7 +5,7 @@ categories: [Kubernetes]
 tags: [Kubernetes, Linux]
 ---
 
-::: tip
+::: abstract
 Pod 是 K8S 的基本单位，它的内部可以有多个容器，容器之间共享 localhost 网络。
 :::
 

@@ -5,7 +5,7 @@ categories: [运维]
 tags: [Shell, Linux]
 ---
 
-::: tip
+::: abstract
 编写 Shell 程序，可以生成文件夹内满足给定条件的`*.gz`文件
 :::
 

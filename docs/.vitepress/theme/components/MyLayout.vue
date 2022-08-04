@@ -2,10 +2,7 @@
   <ClientOnly>
     <SWPopup />
   </ClientOnly>
-  <HomePage v-if="path === '/'" />
-  <!-- <TagsPage v-else-if="path === '/tags/'" /> -->
-  <CategoriesPage v-else-if="path === '/categories/'" />
-  <Layout v-else>
+  <Layout>
     <template #doc-before v-if="frontmatter.title">
       <section>
         <div class="page-title vp-doc">
@@ -22,8 +19,6 @@ import DefaultTheme from 'vitepress/theme';
 import { useData } from 'vitepress';
 import SWPopup from './SWPopup.vue';
 import PageInfo from './PageInfo.vue';
-import HomePage from './HomePage.vue';
-import CategoriesPage from './CategoriesPage.vue';
 const { frontmatter } = useData();
 
 const { Layout } = DefaultTheme;

@@ -5,7 +5,7 @@ categories: [Kubernetes]
 tags: [Kubernetes, Linux]
 ---
 
-::: tip
+::: abstract
 本节通过虚拟机搭建一个具有一个 Master 节点，两个 Node 节点的 K8S 集群，便于了解各种组件。
 :::
 

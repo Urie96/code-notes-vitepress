@@ -67,18 +67,18 @@ const emit = defineEmits(['getCurrentPage']);
 
 const changePage = ref(''); // 跳转页
 
-const pages = Math.ceil(props.total / (props.perPage || 10));
+const pages = computed(() => Math.ceil(props.total / (props.perPage || 10)));
 
-const show = pages && pages != 1;
+const show = computed(() => pages.value && pages.value != 1);
 
-const efont = computed(() => (pages < 7 ? false : props.currentPage > 5));
+const efont = computed(() => (pages.value < 7 ? false : props.currentPage > 5));
 
 const indexs = computed(() => {
   var left = 1;
-  var right = pages;
+  var right = pages.value;
   var ar = [];
-  if (pages >= 7) {
-    if (props.currentPage > 5 && props.currentPage < pages - 4) {
+  if (pages.value >= 7) {
+    if (props.currentPage > 5 && props.currentPage < pages.value - 4) {
       left = Number(props.currentPage) - 3;
       right = Number(props.currentPage) + 3;
     } else {
@@ -86,9 +86,9 @@ const indexs = computed(() => {
         left = 1;
         right = 7;
       } else {
-        right = pages;
+        right = pages.value;
 
-        left = pages - 6;
+        left = pages.value - 6;
       }
     }
   }
@@ -113,7 +113,7 @@ const goPrev = () => {
 };
 
 const goNext = () => {
-  if (props.currentPage < pages) {
+  if (props.currentPage < pages.value) {
     emit('getCurrentPage', props.currentPage + 1);
   }
 };
@@ -121,11 +121,11 @@ const goNext = () => {
 const jumpPage = (id: any) => {
   const numId = parseInt(id);
 
-  if (numId <= pages && numId > 0) {
+  if (numId <= pages.value && numId > 0) {
     emit('getCurrentPage', numId);
     return;
   }
-  alert(`请输入大于0，并且小于${pages}的页码！`);
+  alert(`请输入大于0，并且小于${pages.value}的页码！`);
 };
 </script>
 

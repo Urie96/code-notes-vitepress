@@ -5,7 +5,7 @@ categories: [Kubernetes]
 tags: [Kubernetes, Linux]
 ---
 
-::: tip
+::: abstract
 为了能将本地构建的镜像分发到各个虚拟机，比较优雅的方式是使用 Docker registry，如果是用官网的 DockerHub，本地调试都需要将镜像推送到远程，一来一回耗费需要 4 倍镜像大小的流量。所以本节通过在宿主机上搭建私有仓库，让虚拟机可以直接拉取镜像，不走公网。
 :::
 

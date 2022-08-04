@@ -33,27 +33,25 @@ const tags = [
   ...theme.value.pageData.tags,
 ];
 
-const currentTag = ref('全部');
+const currentTag = ref('');
+
+onMounted(() => {
+  if (globalThis.document) {
+    // 服务端渲染不选标签
+    currentTag.value =
+      new URLSearchParams(location.search).get('tag') || '全部';
+  }
+});
 
 const onTagChange = (tag: string) => {
   currentTag.value = tag;
 };
 
-onMounted(() => {
-  if (globalThis.document) {
-    currentTag.value = new URLSearchParams(location.search).get('tag') || '';
-  }
-});
-
 const tagPages = computed(() => {
   const res = pages.filter(
     (v: any) => v.tags && v.tags.includes(currentTag.value)
   );
-  if (res.length) {
-    return res;
-  } else {
-    return pages;
-  }
+  return res.length ? res : pages;
 });
 </script>
 

@@ -5,7 +5,7 @@ categories: [网络编程]
 tags: [Linux, C]
 ---
 
-::: tip
+::: abstract
 使用 C 语言完成最朴素的 TCP 与 UDP 服务端。
 :::
 

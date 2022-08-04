@@ -5,7 +5,7 @@ categories:
   - 其它
 ---
 
-::: tip
+::: abstract
 永远都不要相信自己的记忆力！
 :::
 

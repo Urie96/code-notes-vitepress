@@ -5,7 +5,7 @@ categories: [区块链]
 tags: [BlockChain, Ethereum]
 ---
 
-::: tip
+::: abstract
 本节通过 k8s 搭建多节点的以太坊私链，并测试 http 接口等功能
 :::
 

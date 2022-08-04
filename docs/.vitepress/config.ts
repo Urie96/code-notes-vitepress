@@ -1,8 +1,7 @@
-import { UserConfig, DefaultTheme } from 'vitepress';
+import { UserConfig, DefaultTheme, createMarkdownRenderer } from 'vitepress';
 import Token from 'markdown-it/lib/token'
 import container from 'markdown-it-container'
-import fs from 'fs';
-import fm from 'front-matter';
+import matter from 'gray-matter';
 import fg from 'fast-glob';
 import { highlight } from './highlight';
 
@@ -17,10 +16,7 @@ export default async () => {
         markdown: {
             theme: 'dark-plus',
             config: (md) => {
-                md.use(container, 'row', {
-                    render: (tokens: Token[], idx: number) =>
-                        tokens[idx].nesting === 1 ? `<div class="custom-block row">\n` : `</div>\n`
-                })
+                useContainer(md)
             },
             highlight: (await highlight('dark-plus')),
         },
@@ -49,6 +45,11 @@ export default async () => {
                     link: 'https://github.com/Urie96'
                 }
             ],
+            personalInfoSocialLinks: [
+                { icon: 'reco-github', link: 'https://github.com/Urie96' },
+                { icon: 'reco-mail', link: 'mailto:urie@mail.ustc.edu.cn' },
+                { icon: 'reco-wechat', link: 'https://s7.addthis.com/static/wechat_follow.html?id=yangrui19960623&u=https://u.wechat.com/EMKvZ_5c_yuQ6j2qDeyJ5J8' },
+            ],
             algolia: {
                 appId: 'EWJHIHWDFQ',
                 apiKey: 'db89e85da0a58d7078b240288ca7e81d',
@@ -60,7 +61,15 @@ export default async () => {
                 { text: '分类', items: pageData.categories.map((v: any) => ({ text: v.name, link: `/categories/?category=${v.name}` })) },
                 { text: '标签', link: '/tags/' },
                 { text: '时间线', link: '/timeline/' },
-                { text: '老版本', link: 'https://lubui.com' },
+                {
+                    text: '我的网页', items: [
+                        { text: '老版笔记', link: 'https://old.lubui.com' },
+                        { text: 'HackBook', link: 'https://book.lubui.com' },
+                        { text: '美好回忆', link: 'http://cro.cab:2342' },
+                        { text: '在一起计时器', link: 'https://huyue.sweetlove.top' },
+                        { text: '悦娃的工具', link: 'https://yue.lubui.com' },
+                    ]
+                }
             ]
         }
     } as UserConfig<DefaultTheme.Config>
@@ -93,29 +102,45 @@ function getSidebar(pages: any) {
     return sidebars
 }
 
+function useContainer(md: any) {
+    return md.use(container, 'row', {
+        render: (tokens: Token[], idx: number) =>
+            tokens[idx].nesting === 1 ? `<div class="custom-block row">\n` : `</div>\n`
+    }).use(container, 'abstract', {
+        render: (tokens: Token[], idx: number) =>
+            tokens[idx].nesting === 1 ? `<div class="custom-block-abstract tip">\n` : `</div>\n`
+    })
+}
+
 async function getPageData() {
     const filePathList = await fg('./docs/**/*.md')
     const getLink = (str: string) => {
         return str.substring('./docs'.length, str.length - '.md'.length)
     }
+
+    const cwd = process.cwd()
+    const md = await createMarkdownRenderer(cwd)
+    useContainer(md)
+
     const pages = filePathList.map(filePath => {
-        const { attributes }: any = fm(fs.readFileSync(filePath, 'utf8'))
-        if (attributes.layout === 'page') {
+        const mdFile = matter.read(filePath, { excerpt: true, excerpt_separator: '<!-- more -->' })
+        if (mdFile.data.layout === 'page') {
             return
         }
         return {
             categories: [],
             tags: [],
-            ...attributes,
+            ...mdFile.data,
             link: getLink(filePath),
-            date: Date.parse(attributes.date)
+            date: Date.parse(mdFile.data.date),
+            excerpt: md.render(mdFile.excerpt!),
         }
-    }).filter(v => v).sort((a, b) => b.date - a.date);
+    }).filter(v => v).sort((a: any, b: any) => b.date - a.date);
 
     const categories: any = []
     const tags: any = []
 
-    pages.forEach(v => {
+    pages.forEach((v: any) => {
         v.categories.forEach((cateName: string) => {
             const category = categories.filter((v: any) => v.name === cateName)?.[0]
             if (category) {

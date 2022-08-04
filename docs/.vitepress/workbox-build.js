@@ -10,16 +10,14 @@ generateSW({
   clientsClaim: true,
   skipWaiting: true,
   sourcemap: false,
-  dontCacheBustURLsMatching: /\.\w{8}\.[^.]*$/,
+  dontCacheBustURLsMatching: /\.\w{8}\.([^.]*|lean.js)$/,
   globPatterns: ['**\/*.{js,css,png,jpg,jpeg,gif,svg,woff,woff2,eot,ttf,otf}', 'index.html'],
-  navigateFallback: '/index.html',
-  navigateFallbackDenylist: [/\/about/],
   runtimeCaching: [
     {
       urlPattern: /https:\/\/(cdn|at|prismjs|kit|fonts|ka)/,
       handler: 'CacheFirst',
       options: {
-        cacheName: 'code-notes-dependency-cdn',
+        cacheName: 'code-notes-vitepress-dependency-cdn',
         cacheableResponse: {
           statuses: [0, 200],
         },

@@ -5,7 +5,7 @@ categories: [其它]
 tags: [Javascript]
 ---
 
-::: tip
+::: abstract
 指定文件路径，复制其 data URi 到剪切板，便于粘贴到 HTML 或者 CSS 中
 :::
 

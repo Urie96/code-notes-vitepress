@@ -5,7 +5,7 @@ categories: [前端]
 tags: [Javascript]
 ---
 
-::: tip
+::: abstract
 Service Worker 可以拦截浏览器的 Fetch 请求，也可以自己发起网络请求，是单独的线程，主要用来主动控制网络请求缓存，提升浏览体验。Work Box 是一套工具，可以方便 地配置 Service Worker。
 :::
 

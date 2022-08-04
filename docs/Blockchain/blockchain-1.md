@@ -5,7 +5,7 @@ categories: [区块链]
 tags: [BlockChain, Ethereum]
 ---
 
-::: tip
+::: abstract
 区块链技术的实现主要包括分布式网络、共识机制、加密算法、账户与存储模型四部分。
 :::
 
