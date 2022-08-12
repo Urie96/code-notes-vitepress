@@ -1,4 +1,6 @@
 @require './iconfont.styl'
+@require './variable.styl'
+@require './zsh.styl'
 
 .custom-block-abstract
   p
@@ -61,7 +63,6 @@ hr
     border: 0;
     border-top: 1px solid var(--border-color);
 
-
 .custom-block.row
     display: flex
     padding: 0
@@ -74,12 +75,13 @@ hr
             flex-shrink:0.4
         &:last-child
             flex-grow: 1
-    
+    .language-zsh
+      &>pre
+        height: 100%
 
-.vp-doc
-    for code in 'zsh' 'http' 'nginx' 'docker' 'makefile' 'diff' 'solidity'
-        [class~={'language-'+code}]:before
-            content: code;
+@media (max-width: $MQMobile)
+  .custom-block.row
+    margin: 16px -27px
 
 :root
     --default-color-10: rgba(255, 255, 255, 1)

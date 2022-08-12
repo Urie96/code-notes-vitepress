@@ -1,6 +1,7 @@
 ---
 title: Kubernetes(二)：本地搭建Docker私有仓库
 date: 2021-07-01 16:35:19 GMT+0800
+sort: 2
 categories: [Kubernetes]
 tags: [Kubernetes, Linux]
 ---

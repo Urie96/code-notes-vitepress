@@ -1,5 +1,6 @@
 ---
 title: 区块链入门(三)：智能合约的部署与交互
+sort: 3
 date: 2022-07-27 17:19:27 GMT+0800
 categories: [区块链]
 tags: [BlockChain, Ethereum]
@@ -196,7 +197,8 @@ $ npx hardhat run deploy.js
 Contract deployed to address: 0x9b0A14b8ab2F6B1D80d94e3a21AEb7f2C816c3A9 # 合约的账户地址
 $ k logs --tail=100 ether-node-767565648f-6z4zm
 INFO [07-29|07:24:53.488] Submitted contract creation              hash=0xc204f342cc4716863e6fcffe15f9a07ed30839031ec02d8f830e54caf73e3516 from=0x811A4593311b7dE8d24554b06DD8778120DA8d19 nonce=0 contract=0x9b0A14b8ab2F6B1D80d94e3a21AEb7f2C816c3A9 value=0
-$ curl --request POST \ # 获取合约的字节码
+$ # 获取合约的字节码
+$ curl --request POST \
   --url http://10.244.0.190:8545/ \
   --header 'content-type: application/json' \
   --data '{"jsonrpc": "2.0","method": "eth_getCode","params": ["0x9b0a14b8ab2f6b1d80d94e3a21aeb7f2c816c3a9","latest"],"id": 1}'
@@ -206,12 +208,14 @@ $ curl --request POST \
   --header 'content-type: application/json' \
   --data '{"jsonrpc": "2.0","method": "eth_getCode","params": ["0x9b0a14b8ab2f6b1d80d94e3a21aeb7f2c816c3a9","pending"],"id": 1}' # 查询状态为pending的
 {"jsonrpc":"2.0","id": 1,"result": "0x60806040523..."}
-$ curl --request POST \ # 开始挖矿
+$ # 开始挖矿
+$ curl --request POST \
   --url http://10.244.0.190:8545/ \
   --header 'content-type: application/json' \
   --data '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":1}'
 {"jsonrpc":"2.0","id":1,"result":null}
-$ curl --request POST \ # 获取合约的字节码
+$ # 获取合约的字节码
+$ curl --request POST \
   --url http://10.244.0.190:8545/ \
   --header 'content-type: application/json' \
   --data '{"jsonrpc": "2.0","method": "eth_getCode","params": ["0x9b0a14b8ab2f6b1d80d94e3a21aeb7f2c816c3a9","latest"],"id": 1}'

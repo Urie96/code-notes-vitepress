@@ -1,22 +1,23 @@
 <template>
   <div class="tags-wrapper">
     <!-- 标签集合 -->
-    <TagList :tags="tags" :currentTag="currentTag" @onTagChange="onTagChange" />
+    <TagList :tags="tags" :currentTag="currentTag" />
 
     <!-- 博客列表 -->
     <NoteAbstract
       class="list"
       :data="tagPages"
+      :currentTag="currentTag"
       @paginationChange="paginationChange"
     ></NoteAbstract>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import TagList from './TagList.vue';
 import NoteAbstract from './NoteAbstract.vue';
-import { useData } from 'vitepress';
+import { useData, inBrowser, useRoute } from 'vitepress';
 
 const { theme } = useData();
 
@@ -35,17 +36,21 @@ const tags = [
 
 const currentTag = ref('');
 
+const route = useRoute();
+
 onMounted(() => {
-  if (globalThis.document) {
+  if (inBrowser) {
     // 服务端渲染不选标签
     currentTag.value =
       new URLSearchParams(location.search).get('tag') || '全部';
+    watch(route, () => {
+      const tag = new URLSearchParams(location.search).get('tag');
+      if (tag) {
+        currentTag.value = tag;
+      }
+    });
   }
 });
-
-const onTagChange = (tag: string) => {
-  currentTag.value = tag;
-};
 
 const tagPages = computed(() => {
   const res = pages.filter(
@@ -60,9 +65,10 @@ const tagPages = computed(() => {
 .tags-wrapper
   max-width: $contentWidth
   margin: 0 auto;
-  padding: 4.6rem 2.5rem 0;
+  margin-bottom: 4em !important
+  padding: 0 2.5rem;
 
 @media (max-width: $MQMobile)
   .tags-wrapper
-    padding: 5rem 0.6rem 0;
+    padding: 0 0.6rem;
 </style>

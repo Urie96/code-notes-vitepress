@@ -9,7 +9,7 @@
         v-show="item.num"
         :key="item.name"
       >
-        <a @click="clickCategory(item.name)">
+        <a @click="router.go('/categories/?category=' + item.name)">
           <span class="category-name">{{ item.name }}</span>
           <span class="post-num" :style="{ backgroundColor: getOneColor() }">
             {{ item.num }}
@@ -28,8 +28,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import { useData, useRouter } from 'vitepress';
+import { ref, computed, onMounted, watch } from 'vue';
+import { useData, useRouter, inBrowser } from 'vitepress';
 import { getOneColor } from '../utils';
 import NoteAbstract from './NoteAbstract.vue';
 
@@ -37,21 +37,20 @@ const { theme } = useData();
 
 const currentCategory = ref(theme.value.pageData.categories[0]);
 
-onMounted(() => {
-  if (globalThis.document) {
-    const category = new URL(location.href).searchParams.get('category');
-    if (category) {
-      currentCategory.value = category;
-    }
-  }
-});
-
 const router = useRouter();
 
-const clickCategory = (category: string) => {
-  currentCategory.value = category;
-  router.go('/categories/?category=' + category);
-};
+onMounted(() => {
+  if (inBrowser) {
+    const init = () => {
+      const category = new URL(location.href).searchParams.get('category');
+      if (category) {
+        currentCategory.value = category;
+      }
+    };
+    init();
+    watch(router.route, init);
+  }
+});
 
 const categoryPages = computed(() =>
   theme.value.pageData.pages.filter(
@@ -71,10 +70,11 @@ const paginationChange = () => {
 .categories-wrapper
   max-width: $contentWidth;
   margin: 0 auto;
-  padding: 4.6rem 2.5rem 0;
+  margin-bottom: 4em !important
+  padding: 0 2.5rem;
   .category-wrapper {
     list-style none
-    padding-left 0
+    padding: 1.5em 0
     .category-item {
       vertical-align: middle;
       margin: 4px 8px 10px;
@@ -119,7 +119,7 @@ const paginationChange = () => {
 
 @media (max-width: $MQMobile)
   .categories-wrapper
-    padding: 4.6rem 1rem 0;
+    padding: 0 1rem;
   .page-edit
     .edit-link
       margin-bottom .5rem

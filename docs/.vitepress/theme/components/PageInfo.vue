@@ -3,9 +3,11 @@
     <reco-icon v-if="pageInfo.author || theme.author" icon="reco-account">
       <span>{{ pageInfo.author || theme.author }}</span>
     </reco-icon>
-    <reco-icon v-if="pageInfo.date" icon="reco-date">
-      <span>{{ formatDateValue(pageInfo.date) }}</span>
-    </reco-icon>
+    <ClientOnly>
+      <reco-icon v-if="pageInfo.date" icon="reco-date">
+        <span>{{ formatDateValue(pageInfo.date) }}</span>
+      </reco-icon>
+    </ClientOnly>
     <reco-icon v-if="showAccessNumber === true" icon="reco-eye"> </reco-icon>
     <reco-icon
       v-if="pageInfo.categories?.length"
@@ -52,10 +54,6 @@ const props = defineProps({
       };
     },
   },
-  author: {
-    type: String,
-    default: '',
-  },
   currentTag: {
     type: String,
     default: '',
@@ -65,12 +63,6 @@ const props = defineProps({
     default: false,
   },
 });
-
-// const goTags = (tag) => {
-//   if (instance.$route.path !== `/tag/${tag}/`) {
-//     instance.$router.push({ path: `/tag/${tag}/` });
-//   }
-// };
 
 const formatDateValue = (timestamp: number) => {
   const { lang } = theme as any;
@@ -98,8 +90,4 @@ const formatDateValue = (timestamp: number) => {
       color $accentColor
     &:hover
       color $accentColor
-@media (max-width: $MQMobile)
-  .tags
-    display block
-    margin-left 0 !important
 </style>

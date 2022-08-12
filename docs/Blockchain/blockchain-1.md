@@ -1,5 +1,6 @@
 ---
 title: 区块链入门(一)：技术简介
+sort: 1
 date: 2022-07-22 13:13:18 GMT+0800
 categories: [区块链]
 tags: [BlockChain, Ethereum]

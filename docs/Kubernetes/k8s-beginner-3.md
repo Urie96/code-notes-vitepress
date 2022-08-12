@@ -1,6 +1,7 @@
 ---
 title: Kubernetes(三)：Pod
 date: 2021-07-01 20:07:03 GMT+0800
+sort: 3
 categories: [Kubernetes]
 tags: [Kubernetes, Linux]
 ---

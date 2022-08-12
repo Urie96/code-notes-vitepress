@@ -1,0 +1,28 @@
+div.language-zsh
+    button.copy
+        background-color: var(--vp-code-copy-code-hover-bg) !important
+    code.language-zsh
+        padding: 0 24px
+        span.token
+            &.function
+                color: rgb(72,197,61)
+            &.root
+                color: rgb(120,232,61)
+            &.signal
+                color: #d16969
+            &.built-in
+                color: #fff    
+            &.parameter
+                color: #d7ba7d
+            &.operator
+                color: #67cdcc
+
+.zsh-window
+    background: #555;
+    border-radius: inherit;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    position: absolute;
+    width: 100%;
+    &>svg
+        margin: 5px 0 1px 10px !important

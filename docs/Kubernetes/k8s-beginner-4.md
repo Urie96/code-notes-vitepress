@@ -1,6 +1,7 @@
 ---
 title: Kubernetes(四)：在多台腾讯云服务器中搭建K8s集群
 date: 2021-12-10 14:40:00 GMT+0800
+sort: 4
 categories: [Kubernetes]
 tags: [Kubernetes, Linux]
 ---

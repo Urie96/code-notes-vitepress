@@ -1,5 +1,6 @@
 ---
 title: 区块链入门(二)：搭建以太坊私链并部署多节点
+sort: 2
 date: 2022-07-22 14:04:59 GMT+0800
 categories: [区块链]
 tags: [BlockChain, Ethereum]
@@ -134,7 +135,7 @@ $ cat /home/ubuntu/.ethereum/keystore/UTC--2022-07-22T07-33-22.567042175Z--811a4
 以太坊官方提供了一个命令行交互工具`puppeth`，可用于生成一个 json 配置信息：
 
 ```zsh
-puppeth
+$ puppeth
 +-----------------------------------------------------------+
 | Welcome to puppeth, your Ethereum private network manager |
 |                                                           |
@@ -412,33 +413,39 @@ INFO [07-27|03:26:04.731] Looking for peers                        peercount=1 t
 ## 通过 HTTP 请求节点
 
 ```zsh
-$ curl --request POST \ # 查区块高度
+$ # 查区块高度
+$ curl --request POST \
   --url http://10.244.0.157:8545/ \
   --header 'content-type: application/json' \
   --data '{"id":1,"jsonrpc":"2.0","method":"eth_blockNumber","params":[]}'
 {"jsonrpc":"2.0","id":1,"result":"0x0"} # 现在挖矿还没开启，所以返回 0
-$ curl --request POST \ # 查某账户地址的以太币余额，单位为wei
+$ # 查某账户地址的以太币余额，单位为wei
+$ curl --request POST \
   --url http://10.244.0.157:8545/ \
   --header 'content-type: application/json' \
   --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["0x811a4593311b7de8d24554b06dd8778120da8d19", "latest"],"id":1}'
 {"jsonrpc":"2.0","id":1,"result":"0x200000000000000000000000000000000000000000000000000000000000000"} # genesis.json中给该账户预分配了以太币
-$ curl --request POST \ # 开始挖矿
+$ # 开始挖矿
+$ curl --request POST \
   --url http://10.244.0.157:8545/ \
   --header 'content-type: application/json' \
   --data '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":1}'
 {"jsonrpc":"2.0","id":1,"result":null}
-$ curl --request POST \ # 停止挖矿
+$ # 停止挖矿
+$ curl --request POST \
   --url http://10.244.0.157:8545/ \
   --header 'content-type: application/json' \
   --data '{"jsonrpc":"2.0","method":"miner_stop","params":[],"id":1}'
 {"jsonrpc":"2.0","id":1,"result":null}
-$ curl --request POST \ # 查区块高度
+$ # 查区块高度
+$ curl --request POST \
   --url http://10.244.0.157:8545/ \
   --header 'content-type: application/json' \
   --data '{"id":1,"jsonrpc":"2.0","method":"eth_blockNumber","params":[]}'
 {"jsonrpc":"2.0","id":1,"result":"0x2"} # 已经有了2个区块
+$ # 请求另一个节点的区块高度，结果相同
 $ curl --request POST \
-  --url http://10.244.0.158:8545/ \ # 请求另一个节点的区块高度，结果相同
+  --url http://10.244.0.158:8545/ \
   --header 'content-type: application/json' \
   --data '{"id":1,"jsonrpc":"2.0","method":"eth_blockNumber","params":[]}'
 {"jsonrpc":"2.0","id":1,"result":"0x2"}
@@ -447,28 +454,35 @@ $ curl --request POST \
 ## 发送交易
 
 ```zsh
-$ curl --request POST \ # 给另一个账户发送以太币，eth_sendTransaction需要该节点已解锁付款方的账户
+$ # 给另一个账户发送以太币，eth_sendTransaction需要该节点已解锁付款方的账户
+$ curl --request POST \
   --url http://10.244.0.157:8545/ \
   --header 'content-type: application/json' \
   --data '{"jsonrpc": "2.0","method": "eth_sendTransaction","params": [{"from": "0x811a4593311b7de8d24554b06dd8778120da8d19","to": "0xB565a3B4a3553474205aAc1Fa1794D8A3A5A03e4","value": "0x100"}],"id": 1}'
 {"jsonrpc":"2.0","id":1,"result":"0x846e5e7d8f2f3c8c16e8cf096dfe58488890ed2cf4c05f9dd91d4f9e43ba1eb9"}
-$ curl --request POST \ # 查询收款方的余额
+$ # 查询收款方的余额
+$ curl --request POST \
   --url http://10.244.0.157:8545/ \
   --header 'content-type: application/json' \
   --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["0xB565a3B4a3553474205aAc1Fa1794D8A3A5A03e4", "latest"],"id":1}' # latest表示最新的区块
 {"jsonrpc":"2.0","id":1,"result":"0x0"} # 因为现在没有启动挖矿，所以余额为0
-$ curl --request POST \ # 查询收款方的余额
-  --url http://10.244.0.158:8545/ \ # 请求任意节点均可
+$ # 查询收款方的余额
+$ curl --request POST \
+  --url http://10.244.0.158:8545/ \
+  # 请求任意节点均可 \
   --header 'content-type: application/json' \
   --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["0xB565a3B4a3553474205aAc1Fa1794D8A3A5A03e4", "pending"],"id":1}' # 状态pending，表示待打包状态
 {"jsonrpc":"2.0","id":1,"result":"0x100"} # 每次交易都会立即广播到全网等待打包
-$ curl --request POST \ # 开始挖矿
+$ # 开始挖矿
+$ curl --request POST \
   --url http://10.244.0.157:8545/ \
   --header 'content-type: application/json' \
   --data '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":1}'
 {"jsonrpc":"2.0","id":1,"result":null}
-$ curl --request POST \ # 查询收款方的余额
-  --url http://10.244.0.158:8545/ \ # 请求任意节点均可
+$ # 查询收款方的余额
+$ curl --request POST \
+  --url http://10.244.0.158:8545/ \
+  # 请求任意节点均可 \
   --header 'content-type: application/json' \
   --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["0xB565a3B4a3553474205aAc1Fa1794D8A3A5A03e4", "latest"],"id":1}'
 {"jsonrpc":"2.0","id":1,"result":"0x100"} # 交易已被打包，余额为0x100

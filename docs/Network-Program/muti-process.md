@@ -1,5 +1,6 @@
 ---
 title: C语言网络编程（二）：阻塞I/O + 多进程
+sort: 2
 date: 2021-04-25 10:08:07 GMT+0800
 categories: [网络编程]
 tags: [Linux, C]

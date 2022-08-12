@@ -33,24 +33,18 @@ spec:
     app: code-notes-vitepress
   type: ClusterIP
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
   name: code-notes-vitepress
 spec:
-  ingressClassName: nginx
   tls:
-    - hosts:
-        - lubui.com
-      secretName: tls-lubui.com
-  rules:
-    - host: lubui.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: code-notes-vitepress
-                port:
-                  number: 80
+    secretName: tls-lubui.com
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`lubui.com`)||Host(`www.lubui.com`)
+      kind: Rule
+      services:
+        - name: code-notes-vitepress
+          port: 80

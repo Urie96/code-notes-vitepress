@@ -1,6 +1,7 @@
 ---
 title: Kubernetes(一)：本地搭建K8S三节点集群
 date: 2021-06-30 19:13:23 GMT+0800
+sort: 1
 categories: [Kubernetes]
 tags: [Kubernetes, Linux]
 ---

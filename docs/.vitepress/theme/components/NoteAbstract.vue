@@ -52,15 +52,13 @@ const getCurrentPage = (page: number) => {
 
 onMounted(() => {
   currentPage.value = getStoragePage() || 1;
+  watch(
+    () => props.data,
+    () => {
+      currentPage.value = 1;
+    }
+  );
 });
-
-watch(
-  () => props.data,
-  () => {
-    console.log(currentPage.value);
-    currentPage.value = 1;
-  }
-);
 </script>
 
 <style lang="stylus" scoped>

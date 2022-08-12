@@ -86,11 +86,14 @@ func updateDNS(txt string) error {
 
 ```zsh
 $ sudo certbot certonly \
-  -d \*.sweetlove.top \ # 通配符域名
+  -d \*.sweetlove.top \
+  # 通配符域名 \
   -d sweetlove.top \
   --manual \
-  --preferred-challenges dns \ # 使用DNS验证域名
-  --manual-auth-hook "/home/pi/workplace/go/alidns/alidns" \ # 修改DNS的hook
+  --preferred-challenges dns \
+  # 使用DNS验证域名 \
+  --manual-auth-hook "/home/pi/workplace/go/alidns/alidns" \
+   # 修改DNS的hook \
   --deploy-hook "echo Done" # 证书更新完成的hook
 # 第一次使用会询问邮箱之类的信息，此处省略
 Waiting for verification...
@@ -154,4 +157,4 @@ Congratulations, all renewals succeeded:
 
 ## 验证证书
 
-![chrome-cert-preview.png](./chrome-cert-preview.png)
+![chrome-cert-preview.png](https://cdn.jsdelivr.net/gh/Urie96/images/20220804144201.jpg)

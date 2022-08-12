@@ -1,5 +1,6 @@
 ---
-title: C语言网络编程（六）：I/O多路复用——epoll
+title: C语言网络编程（六）：I/O多路复用——`epoll()`
+sort: 6
 date: 2021-04-30 11:32:35 GMT+0800
 categories: [网络编程]
 tags: [Linux, C]

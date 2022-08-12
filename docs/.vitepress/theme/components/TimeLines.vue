@@ -16,7 +16,7 @@
               <span class="date">
                 {{ subItem.dateString }}
               </span>
-              <span class="title" @click="go(subItem.link)">
+              <span class="title" @click="router.go(subItem.link)">
                 {{ subItem.title }}
               </span>
             </li>
@@ -33,10 +33,6 @@ import { useRouter, useData } from 'vitepress';
 
 const router = useRouter();
 const { theme } = useData();
-
-const go = (url: string) => {
-  router.go(url);
-};
 
 const recoShowModule = ref(true);
 
@@ -75,11 +71,12 @@ pages.forEach((v: any) => {
     padding-left: 1.2em;
   max-width: $contentWidth;
   margin: 0 auto;
-  padding: 4.6rem 2.5rem 0;
+  padding: 2.5rem 2.5rem 0;
   .timeline-content
     box-sizing border-box
     position relative
     list-style none
+    padding-bottom: 4em
     &::after {
       content: " ";
       position: absolute;
@@ -164,5 +161,6 @@ pages.forEach((v: any) => {
     }
 @media (max-width: $MQMobile)
   .timeline-wrapper
-    margin: 0 1.2rem;
+    margin: 0;
+    padding: 2rem 2rem 0;
 </style>

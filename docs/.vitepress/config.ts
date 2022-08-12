@@ -18,7 +18,7 @@ export default async () => {
             config: (md) => {
                 useContainer(md)
             },
-            highlight: (await highlight('dark-plus')),
+            highlight: (await highlight()),
         },
         // ignoreDeadLinks: true,
         head: [
@@ -45,6 +45,10 @@ export default async () => {
                     link: 'https://github.com/Urie96'
                 }
             ],
+            docFooter: {
+                prev: '上一篇',
+                next: '下一篇',
+            },
             personalInfoSocialLinks: [
                 { icon: 'reco-github', link: 'https://github.com/Urie96' },
                 { icon: 'reco-mail', link: 'mailto:urie@mail.ustc.edu.cn' },
@@ -53,12 +57,14 @@ export default async () => {
             algolia: {
                 appId: 'EWJHIHWDFQ',
                 apiKey: 'db89e85da0a58d7078b240288ca7e81d',
-                indexName: 'code_notes'
+                indexName: 'code_notes',
+                buttonText: '搜索'
             },
             sidebar: getSidebar(pageData.pages),
             pageData: pageData,
             nav: [
-                { text: '分类', items: pageData.categories.map((v: any) => ({ text: v.name, link: `/categories/?category=${v.name}` })) },
+                { text: '主页', link: '/' },
+                { text: '分类', items: pageData.categories.map((v: any) => ({ text: v.name, link: `/categories/?category=${v.name}` })), activeMatch: '/categories/.*' },
                 { text: '标签', link: '/tags/' },
                 { text: '时间线', link: '/timeline/' },
                 {
@@ -85,17 +91,18 @@ function getSidebar(pages: any) {
             text: v.title || '未命名文件',
             link: v.link,
             date: v.date,
+            sort: v.sort,
         };
         (v.categories || []).forEach((cate: any) => {
             categories[cate] = categories[cate] || []
             categories[cate].push(sideBarItem)
         });
     })
-    const sidebars: any = [];
+    const sidebars: DefaultTheme.Sidebar = [];
     for (const cate in categories) {
         sidebars.push({
             text: cate,
-            items: categories[cate].sort((a: any, b: any) => b.date - a.date)
+            items: categories[cate].sort((a: any, b: any) => a.sort - b.sort || b.date - a.date)
         })
     }
     sidebars.sort((a: any, b: any) => b.items[0].date - a.items[0].date)
@@ -124,10 +131,11 @@ async function getPageData() {
 
     const pages = filePathList.map(filePath => {
         const mdFile = matter.read(filePath, { excerpt: true, excerpt_separator: '<!-- more -->' })
-        if (mdFile.data.layout === 'page') {
+        if (mdFile.data.layout === 'page' || mdFile.data.status === 'WIP') {
             return
         }
         return {
+            sort: 1 << 30,
             categories: [],
             tags: [],
             ...mdFile.data,

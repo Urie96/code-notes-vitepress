@@ -50,6 +50,10 @@ EXPOSE 80 443
 CMD ["nginx","-g","daemon off;"]
 ```
 
+::: tip
+如果没有代理，`apk add`会很慢，可以在`apk add`命令前加上`sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories`
+:::
+
 ## Nginx Brotli Config
 
 Nginx 服务预压缩的文件，如果请求头中的`accept-encoding`字段不含有`br`，则可以响应预压缩的 gzip 文件。

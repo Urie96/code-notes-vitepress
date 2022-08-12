@@ -1,5 +1,6 @@
 ---
 title: C语言网络编程（附录）：原文中依赖的函数
+sort: 7
 date: 2021-04-26 12:32:44 GMT+0800
 categories: [网络编程]
 tags: [Linux, C]

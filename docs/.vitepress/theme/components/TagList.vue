@@ -6,7 +6,7 @@
       :key="item.name"
       :class="{ active: item.name == currentTag }"
       :style="{ backgroundColor: getOneColor() }"
-      @click="clickTag(item.name)"
+      @click="router.go('/tags/?tag=' + item.name)"
     >
       {{ item.name }}
     </span>
@@ -29,12 +29,6 @@ const props = defineProps({
     default: '',
   },
 });
-
-const emit = defineEmits(['onTagChange']);
-const clickTag = (tag: string) => {
-  emit('onTagChange', tag); // fix: build之后点击tag，浏览器地址栏会变化，但是currentTag不刷新
-  router.go('/tags/?tag=' + tag);
-};
 </script>
 
 <style lang="stylus" scoped>

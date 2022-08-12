@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vitepress dev docs",
-    "build": "vitepress build docs && yarn sw",
+    "build": "vitepress build docs",
     "serve": "vitepress serve docs",
     "sw": "node docs/.vitepress/workbox-build.js",
     "zip": "node docs/.vitepress/zip.mjs"

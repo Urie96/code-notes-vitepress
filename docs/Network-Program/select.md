@@ -1,5 +1,6 @@
 ---
 title: C语言网络编程（四）：I/O多路复用——`select()`
+sort: 4
 date: 2021-04-27 15:49:15 GMT+0800
 categories: [网络编程]
 tags: [Linux, C]
