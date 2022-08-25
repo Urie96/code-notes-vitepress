@@ -191,7 +191,12 @@ ul
       &:hover {
         box-shadow var(--box-shadow-hover)
       }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: 500;
+        line-height: 1.25;
+      }
       h4 {
+        margin 1.33em 0
         color var(--text-color)
       }
       .category-wrapper {

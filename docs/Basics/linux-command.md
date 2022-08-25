@@ -219,7 +219,7 @@ nc 可以监听某个端口，并代理到另一个端口，这样就可以查�
 
 ```zsh
 $ mkfifo pipe
-$ nc -l 80 < pipe | tee -a in | nc sweetlove.top 80 | tee -a out > pipe &
+$ nc -lkp 80 < pipe | tee -a in | nc sweetlove.top 80 | tee -a out > pipe &
 [1] 50192 50193 50194 50195
 $ curl localhost
 $ cat in

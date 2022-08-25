@@ -42,16 +42,18 @@ const { theme } = useData();
 </script>
 
 <style lang="stylus" scoped>
-h1, h2, h3, h4, h5, h6
-  font-weight: 500;
-  line-height: 1.25;
-h3
-  font-size: 1.2rem;
-  margin 1em 0
-h6
-  font-size: 12px
-
 .personal-info-wrapper {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  h3 {
+    font-size: 1.2rem;
+    margin 1em 0
+  }
+  h6 {
+    font-size: 12px
+  }
   .personal-img {
     display block
     margin 2rem auto 1rem

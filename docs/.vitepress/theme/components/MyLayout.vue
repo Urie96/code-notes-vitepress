@@ -7,9 +7,12 @@
       <section>
         <div class="page-title vp-doc">
           <h1 class="title">{{ frontmatter.title }}</h1>
-          <PageInfo :pageInfo="frontmatter" />
+          <PageInfo :pageInfo="frontmatter" :showAccessNumber="true" />
         </div>
       </section>
+    </template>
+    <template #doc-after>
+      <Valine />
     </template>
   </Layout>
 </template>
@@ -19,6 +22,8 @@ import DefaultTheme from 'vitepress/theme';
 import { useData } from 'vitepress';
 import SWPopup from './SWPopup.vue';
 import PageInfo from './PageInfo.vue';
+import Valine from './Valine.vue';
+
 const { frontmatter } = useData();
 
 const { Layout } = DefaultTheme;

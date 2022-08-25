@@ -21,8 +21,12 @@ async function main() {
     grammar: grammer,
   })
 
-  const code = `$ k logs --tail=100 "$pwd" ether-node-767565648f-6z4zm
+  const code = `$ (MODE=dev cd ~/workplace && find . -type f -name "*.sh" \
+  --exec sh -c "echo {}") \
+  && echo "current workplace is: \`pwd\`" \
+  || grep "$SHELL" | awk '{print $9}' > a.txt &
   {"jsonrpc":"2.0","id": 1,"result": "0x60806040523..."}
+  ^C
    `
 
   const res = highlighter.codeToHtml(code.replace(/^\$/, '❯'), { lang: 'zsh' })

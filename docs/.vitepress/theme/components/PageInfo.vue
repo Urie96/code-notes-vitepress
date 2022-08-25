@@ -7,8 +7,12 @@
       <reco-icon v-if="pageInfo.date" icon="reco-date">
         <span>{{ formatDateValue(pageInfo.date) }}</span>
       </reco-icon>
+      <reco-icon v-if="showAccessNumber === true" icon="reco-eye">
+        <span class="leancloud-visitors" :id="getPath()">
+          <a class="leancloud-visitors-count" style="color: #999"></a>
+        </span>
+      </reco-icon>
     </ClientOnly>
-    <reco-icon v-if="showAccessNumber === true" icon="reco-eye"> </reco-icon>
     <reco-icon
       v-if="pageInfo.categories?.length"
       icon="reco-category"
@@ -68,13 +72,14 @@ const formatDateValue = (timestamp: number) => {
   const { lang } = theme as any;
   return new Intl.DateTimeFormat(lang).format(new Date(timestamp));
 };
+
+const getPath = () => window.location.pathname;
 </script>
 
 <style lang="stylus" scoped>
 @require '../styles/variable.styl'
 .page-info
   color: #7F7F7F
-  font-size: 15px;
 .iconfont
   display inline-block
   line-height 1.5rem

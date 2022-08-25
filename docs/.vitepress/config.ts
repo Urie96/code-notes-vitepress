@@ -31,6 +31,7 @@ export default async () => {
             ['link', { rel: 'mask-icon', href: '/favicon.svg', color: '#3eaf7c' }],
             ['meta', { name: 'msapplication-TileImage', content: '/favicon.svg' }],
             ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
+            ['script', { async: "", defer: "", 'data-website-id': "4471123b-b2d4-417d-aafe-30f93ef91a5b", src: "https://umami.lubui.com/umami.js" }]
         ],
         themeConfig: {
             author: '杨锐',
@@ -76,7 +77,13 @@ export default async () => {
                         { text: '悦娃的工具', link: 'https://yue.lubui.com' },
                     ]
                 }
-            ]
+            ],
+            valineConfig: {
+                appId: 'fSNwRSMOQpKoQRjh445uVuRd-gzGzoHsz',
+                appKey: '3JI5UOTHspBwX1DC91nx6rbW',
+                placeholder: '这里可以直接发评论哦～',
+                lang: 'zh',
+            }
         }
     } as UserConfig<DefaultTheme.Config>
 }
@@ -115,7 +122,7 @@ function useContainer(md: any) {
             tokens[idx].nesting === 1 ? `<div class="custom-block row">\n` : `</div>\n`
     }).use(container, 'abstract', {
         render: (tokens: Token[], idx: number) =>
-            tokens[idx].nesting === 1 ? `<div class="custom-block-abstract tip">\n` : `</div>\n`
+            tokens[idx].nesting === 1 ? `<div class="custom-block-abstract tip vp-doc">\n` : `</div>\n`
     })
 }
 

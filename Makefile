@@ -1,7 +1,7 @@
 .PHONY: image
 
 image:
-	yarn build
+	# yarn build
 	yarn sw
 	yarn zip
 	docker build -t hub.lubui.com/code-notes-vitepress .
@@ -10,3 +10,8 @@ image:
 search:
 	node docs/.vitepress/gen-docsearch-config.mjs|tee /tmp/config.json
 	cd /home/ubuntu/workplace/py/docsearch-scraper && pipenv run ./docsearch run /tmp/config.json
+
+upload:
+	yarn build
+	yarn sw
+	qshell qupload2 --src-dir=/home/ubuntu/workplace/js/code-notes-vitepress/dist --thread-count=10 --overwrite --bucket=lubui-com

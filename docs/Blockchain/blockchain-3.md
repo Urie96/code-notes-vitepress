@@ -12,6 +12,18 @@ tags: [BlockChain, Ethereum]
 
 <!-- more -->
 
+```zsh
+$ MODE=dev echo "$MODE" '$MODE' \
+    && (cd ~/workplace && find . -type f -name "*.sh" \
+    --exec sh -c "echo {}") \
+    || grep -nr "hello\`world, `pwd`" | awk '{print $9}' > a &
+$ cat a # hello, world
+The output is:
+{"jsonrpc":"2.0","id": 1,"result": "0x60806040523..."}
+^C
+$ # Ctrl+C
+```
+
 ## 通过 keystore 文件与密码解析得到私钥
 
 上一节通过`geth account new`生成的账户并没有私钥，但是可以通过一些第三方库计算出私钥
