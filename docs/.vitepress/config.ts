@@ -46,10 +46,18 @@ export default async () => {
                     link: 'https://github.com/Urie96'
                 }
             ],
+            editLink: {
+                pattern: 'https://github.com/Urie96/code-notes-vitepress/edit/main/docs/:path',
+                text: '编辑此页'
+            },
             docFooter: {
                 prev: '上一篇',
                 next: '下一篇',
             },
+            // footer: {
+                // message: 'Released under the MIT License.',
+                // copyright: 'Copyright © 2019-present Evan You'
+            // },
             personalInfoSocialLinks: [
                 { icon: 'reco-github', link: 'https://github.com/Urie96' },
                 { icon: 'reco-mail', link: 'mailto:urie@mail.ustc.edu.cn' },
@@ -70,10 +78,9 @@ export default async () => {
                 { text: '时间线', link: '/timeline/' },
                 {
                     text: '我的网页', items: [
-                        { text: '老版笔记', link: 'https://old.lubui.com' },
                         { text: 'HackBook', link: 'https://book.lubui.com' },
                         { text: '美好回忆', link: 'http://cro.cab:2342' },
-                        { text: '在一起计时器', link: 'https://huyue.sweetlove.top' },
+                        { text: '在一起计时器', link: 'https://huyue.lubui.com' },
                         { text: '悦娃的工具', link: 'https://yue.lubui.com' },
                     ]
                 }

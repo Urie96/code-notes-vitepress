@@ -42,7 +42,7 @@
               v-for="(item, index) in theme.pageData.categories"
               :key="item.name"
             >
-              <a @click="router.go('/categories?category=' + item.name)">
+              <a @click="router.go('/categories/?category=' + item.name)">
                 <span class="category-name">{{ item.name }}</span>
                 <span
                   class="post-num"
