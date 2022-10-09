@@ -54,10 +54,10 @@ export default async () => {
                 prev: '上一篇',
                 next: '下一篇',
             },
-            // footer: {
-                // message: 'Released under the MIT License.',
+            footer: {
+                message: '蜀ICP备20013653号-2',
                 // copyright: 'Copyright © 2019-present Evan You'
-            // },
+            },
             personalInfoSocialLinks: [
                 { icon: 'reco-github', link: 'https://github.com/Urie96' },
                 { icon: 'reco-mail', link: 'mailto:urie@mail.ustc.edu.cn' },

@@ -3,6 +3,7 @@
 image:
 	# yarn build
 	yarn sw
+	node docs/.vitepress/gen-sitemap.mjs
 	yarn zip
 	docker build -t hub.lubui.com/code-notes-vitepress .
 	docker push hub.lubui.com/code-notes-vitepress

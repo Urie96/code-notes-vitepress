@@ -19,6 +19,7 @@
     "fast-glob": "^3.2.11",
     "gray-matter": "^4.0.3",
     "markdown-it-container": "^3.0.0",
+    "sitemap": "^7.1.1",
     "stylus": "^0.58.1",
     "vitepress": "^1.0.0-alpha.4",
     "vue": "^3.2.37",
