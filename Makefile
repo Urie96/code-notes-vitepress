@@ -1,12 +1,16 @@
 .PHONY: image
 
 image:
-	# yarn build
+	yarn build
 	yarn sw
 	node docs/.vitepress/gen-sitemap.mjs
 	yarn zip
 	docker build -t hub.lubui.com/code-notes-vitepress .
 	docker push hub.lubui.com/code-notes-vitepress
+
+deploy: image
+	sudo kubectl scale --replicas=0 deployment code-notes-vitepress
+	sudo kubectl scale --replicas=1 deployment code-notes-vitepress
 
 search:
 	node docs/.vitepress/gen-docsearch-config.mjs|tee /tmp/config.json

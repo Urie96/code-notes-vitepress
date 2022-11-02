@@ -56,7 +56,7 @@ export default async () => {
             },
             footer: {
                 message: '蜀ICP备20013653号-2',
-                // copyright: 'Copyright © 2019-present Evan You'
+                copyright: ''
             },
             personalInfoSocialLinks: [
                 { icon: 'reco-github', link: 'https://github.com/Urie96' },

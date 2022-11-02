@@ -83,5 +83,10 @@
     "prefix": "badge",
     "scope": "markdown",
     "body": "<Badge text=\"$CURRENT_YEAR.$CURRENT_MONTH.${CURRENT_DATE}+\" />"
+  },
+  "b": {
+    "prefix": "b",
+    "scope": "markdown",
+    "body": "**$1**"
   }
 }

@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { register } from 'register-service-worker';
+import { register } from '../utils/register';
 const enable = ref(false);
 const message = '发现新内容可用';
 
@@ -58,7 +58,7 @@ register('/service-worker.js', {
       'No internet connection found. App is running in offline mode.'
     );
   },
-  error(error) {
+  error(error: any) {
     console.error('Error during service worker registration:', error);
   },
 });
