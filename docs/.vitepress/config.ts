@@ -1,9 +1,12 @@
 import { UserConfig, DefaultTheme, createMarkdownRenderer } from 'vitepress';
 import Token from 'markdown-it/lib/token'
 import container from 'markdown-it-container'
+import plantuml from './lib/markdown-it-plantuml';
+import mermaid from './lib/markdown-it-mermaid';
 import matter from 'gray-matter';
 import fg from 'fast-glob';
 import { highlight } from './highlight';
+
 
 export default async () => {
     const pageData = await getPageData()
@@ -17,6 +20,7 @@ export default async () => {
             theme: 'dark-plus',
             config: (md) => {
                 useContainer(md)
+                md.use(plantuml, { imageFormat: 'svg' }).use(mermaid)
             },
             highlight: (await highlight()),
         },
