@@ -13,7 +13,7 @@
         </ModuleTransition>
 
         <ModuleTransition delay="0.04">
-          <h1 v-if="recoShowModule">Young's Code Notes</h1>
+          <h1 v-if="recoShowModule">我的笔记</h1>
         </ModuleTransition>
 
         <ModuleTransition delay="0.08">
@@ -116,7 +116,7 @@ const paginationChange = () => {
     .hero
         & > div
             & > h1
-                font 4rem fantasy
+                // font 2rem
             & > p.description
                 font 2.5rem Italianno, cursive
 

@@ -1,8 +1,7 @@
 import { UserConfig, DefaultTheme, createMarkdownRenderer } from 'vitepress';
 import Token from 'markdown-it/lib/token'
 import container from 'markdown-it-container'
-import plantuml from './lib/markdown-it-plantuml';
-import mermaid from './lib/markdown-it-mermaid';
+import uml from './lib/markdown-it-uml';
 import matter from 'gray-matter';
 import fg from 'fast-glob';
 import { highlight } from './highlight';
@@ -12,7 +11,7 @@ export default async () => {
     const pageData = await getPageData()
     return {
         outDir: '../dist',
-        title: 'LUBUI',
+        title: '我的笔记',
         description: ' ',
         lang: 'zh-CN',
         lastUpdated: true,
@@ -20,7 +19,7 @@ export default async () => {
             theme: 'dark-plus',
             config: (md) => {
                 useContainer(md)
-                md.use(plantuml, { imageFormat: 'svg' }).use(mermaid)
+                md.use(uml)
             },
             highlight: (await highlight()),
         },
@@ -40,7 +39,7 @@ export default async () => {
         themeConfig: {
             author: '杨锐',
             authorAvatar: '/avatar.svg',
-            siteTitle: 'LUBUI',
+            siteTitle: '我的笔记',
             logo: '/favicon.svg',
             lastUpdatedText: '最近更新于',
             outlineTitle: '本页目录',
