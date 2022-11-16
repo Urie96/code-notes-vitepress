@@ -4,34 +4,38 @@ const grammer = require('./zsh_grammer.json');
 const zshTheme = require('./zsh_theme.json');
 
 async function main() {
-  let highlighter = await getHighlighter({
-    theme: 'dark-plus'
-  })
+    let highlighter = await getHighlighter({
+        theme: 'dark-plus',
+    });
 
-  const darkPlus = highlighter.getTheme('dark-plus')
-  darkPlus.settings.push(...zshTheme)
+    const darkPlus = highlighter.getTheme('dark-plus');
+    darkPlus.settings.push(...zshTheme);
 
-  highlighter = await getHighlighter({
-    themes: [darkPlus]
-  })
+    highlighter = await getHighlighter({
+        themes: [darkPlus],
+    });
 
-  await highlighter.loadLanguage({
-    id: "zsh",
-    scopeName: 'source.zsh',
-    grammar: grammer,
-  })
+    await highlighter.loadLanguage({
+        id: 'zsh',
+        scopeName: 'source.zsh',
+        grammar: grammer,
+    });
 
-  const code = `$ (MODE=dev cd ~/workplace && find . -type f -name "*.sh" \
+    const code = `$ (MODE=dev cd ~/workplace && find . -type f -name "*.sh" \
   --exec sh -c "echo {}") \
   && echo "current workplace is: \`pwd\`" \
   || grep "$SHELL" | awk '{print $9}' > a.txt &
   {"jsonrpc":"2.0","id": 1,"result": "0x60806040523..."}
   ^C
-   `
+   `;
 
-  const res = highlighter.codeToHtml(code.replace(/^\$/, '❯'), { lang: 'zsh' })
+    const res = highlighter.codeToHtml(code.replace(/^\$/, '❯'), {
+        lang: 'zsh',
+    });
 
-  fs.writeFileSync('index.html', `<!DOCTYPE html>
+    fs.writeFileSync(
+        'index.html',
+        `<!DOCTYPE html>
   <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -42,9 +46,8 @@ async function main() {
   <body>
     ${res}
   </body>
-  </html>`)
-
+  </html>`,
+    );
 }
 
-
-main()
+main();

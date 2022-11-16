@@ -9,7 +9,9 @@
     "build": "vitepress build docs",
     "serve": "vitepress serve docs",
     "sw": "node docs/.vitepress/workbox-build.js",
-    "zip": "node docs/.vitepress/zip.mjs"
+    "zip": "node docs/.vitepress/zip.mjs",
+    "lint": "rome check . --apply-suggested && rome check .",
+    "fmt": "rome format . --write"
   },
   "devDependencies": {
     "@types/markdown-it-container": "^2.0.5",
