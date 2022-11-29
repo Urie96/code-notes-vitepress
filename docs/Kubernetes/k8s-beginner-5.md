@@ -2,7 +2,6 @@
 title: Kubernetes(五)：换用轻量级的k3s集群
 date: 2022-08-10 12:14:52 GMT+0800
 sort: 5
-# status: WIP
 categories: [Kubernetes]
 tags: [Kubernetes]
 ---

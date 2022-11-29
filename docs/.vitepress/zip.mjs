@@ -1,5 +1,5 @@
 import fs from 'fs';
-import glob from 'glob';
+import fg from 'fast-glob';
 import brotli from 'brotli';
 import chalk from 'chalk';
 import zlib from 'zlib';
@@ -7,20 +7,20 @@ import zlib from 'zlib';
 const pattern = './dist/**/*.{js,css,json,svg,html}';
 const threshold = 1024 * 5;
 
-glob(pattern, (err, files) => {
-    files.forEach((file) => {
-        fs.readFile(file, (err, src) => {
-            if (src.length > threshold) {
-                const brFileName = `${file}.br`;
-                const gzFileName = `${file}.gz`;
-                const brzip = brotli.compress(src, { mode: 1 });
-                const gzip = zlib.gzipSync(src);
-                printProfitInfo(brFileName, src.length, brzip.length);
-                printProfitInfo(gzFileName, src.length, gzip.length);
-                fs.writeFile(brFileName, brzip, () => {});
-                fs.writeFile(gzFileName, gzip, () => {});
-            }
-        });
+const files = await fg(pattern);
+
+files.forEach((file) => {
+    fs.readFile(file, (err, src) => {
+        if (src.length > threshold) {
+            const brFileName = `${file}.br`;
+            const gzFileName = `${file}.gz`;
+            const brzip = brotli.compress(src, { mode: 1 });
+            const gzip = zlib.gzipSync(src);
+            printProfitInfo(brFileName, src.length, brzip.length);
+            printProfitInfo(gzFileName, src.length, gzip.length);
+            fs.writeFile(brFileName, brzip, () => {});
+            fs.writeFile(gzFileName, gzip, () => {});
+        }
     });
 });
 

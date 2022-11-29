@@ -192,7 +192,7 @@ async function getPageData() {
                 excerpt: true,
                 excerpt_separator: '<!-- more -->',
             });
-            if (mdFile.data.layout === 'page' || mdFile.data.status === 'WIP') {
+            if (mdFile.data.layout === 'page' || mdFile.data.disable === true) {
                 return;
             }
             return {

@@ -3,7 +3,7 @@ title: try-coreelec
 date: 2022-11-12 10:25:00 GMT+0800
 categories: [家庭服务]
 tags: [CoreELEC]
-status: WIP
+disable: true
 ---
 
 ```zsh

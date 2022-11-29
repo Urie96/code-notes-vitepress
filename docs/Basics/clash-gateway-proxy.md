@@ -1,7 +1,7 @@
 ---
 title: 旁路由通过配置iptables和Clash实现局域网全设备无感知透明代理
 date: 2022-11-03 19:34:35 GMT+0800
-categories: [基础]
+categories: [家庭服务]
 tags: [iptables, Clash, Proxy]
 ---
 
