@@ -116,7 +116,12 @@ endif
 
 ::: tip
 
-1. **DNAT** 可以作为一种端口映射，比如把光猫的 `8080` 端口映射到下游`192.168.1.2`的`8443`端口上，外网请求光猫的 `8080` 就等于请求内部的`192.168.1.2:8443`；
+1. **DNAT** 可以作为一种端口映射，比如把路由器的 `8080` 端口映射到下游`192.168.2.2`的`8443`端口上，外网请求主路由的 `8080` 就等于请求内部的`192.168.1.2:8443`；
+
+```zsh
+$ sudo iptables -t nat -I PREROUTING -d 192.168.1.2 -p tcp --dport 8080 -j DNAT --to-destination 192.168.2.2:8443
+```
+
 2. **P2P** 打洞：两个在不同 NAT 下的局域网设备通常无法直接连接，但是可以通过一台公网设备作为信使，三端配合来“欺骗”两个 NAT 映射表，实现两台局域网设备直连。（貌似[`pwnat`](https://github.com/samyk/pwnat)可以不需要公网设备，通过 ICMP 来“欺骗”NAT 映射表实现直连）；
 3. **SNAT** 加在 nat 表的 **POSTROUTING** 链，**DNAT**加在 nat 表的 **PREROUTING** 链。
 
@@ -147,7 +152,8 @@ $ # 配置enp4s0网卡进来的包走CLASH链
 
 **Debian**使用的是`isc-dhcp-server`，编辑其配置文件：
 
-```nginx
+```ini
+# /etc/dhcp/dhcpd.conf
 ddns-update-style none;
 
 subnet 192.168.2.0 netmask 255.255.255.0 {
