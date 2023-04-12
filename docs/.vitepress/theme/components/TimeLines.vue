@@ -14,7 +14,7 @@
           <ul class="year-wrapper">
             <li v-for="(subItem, subIndex) in item.pages" :key="subIndex">
               <span class="date">
-                {{ subItem.dateString }}
+                {{ subItem?.dateString }}
               </span>
               <span class="title" @click="router.go(subItem.link)">
                 {{ subItem.title }}
@@ -32,21 +32,25 @@ import { ref } from 'vue';
 import { useRouter, useData } from 'vitepress';
 
 const router = useRouter();
-const { theme } = useData();
+const { theme } = useData<ReadonlyThemeConfig>();
 
 const recoShowModule = ref(true);
 
 const { pages } = theme.value.pageData;
 
-const timePages: any = [];
+const timePages: {
+  year: number;
+  pages: (Page & { dateString: string })[];
+  dateString?: string;
+}[] = [];
 
-pages.forEach((v: any) => {
+pages.forEach((v) => {
   if (v.date) {
     const data = new Date(v.date);
     const year = data.getFullYear();
     const month = data.getMonth() + 1;
     const day = data.getDate();
-    const thisYearPages = timePages.find((v: any) => v.year === year);
+    const thisYearPages = timePages.find((v) => v.year === year);
     const thisPage = {
       ...v,
       dateString: `${month}-${day}`,

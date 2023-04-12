@@ -33,9 +33,9 @@ import { useData, useRouter, inBrowser } from 'vitepress';
 import { getOneColor } from '../utils';
 import NoteAbstract from './NoteAbstract.vue';
 
-const { theme } = useData();
+const { theme } = useData<ReadonlyThemeConfig>();
 
-const currentCategory = ref(theme.value.pageData.categories[0]);
+const currentCategory = ref(theme.value?.pageData?.categories?.[0]?.name);
 
 const router = useRouter();
 
@@ -54,7 +54,7 @@ onMounted(() => {
 
 const categoryPages = computed(() =>
   theme.value.pageData.pages.filter(
-    (v: any) => v.categories && v.categories.includes(currentCategory.value)
+    (v) => v.categories && v.categories.includes(currentCategory.value)
   )
 );
 

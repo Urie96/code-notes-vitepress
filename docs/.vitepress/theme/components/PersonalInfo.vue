@@ -38,7 +38,7 @@
 
 <script setup lang="ts">
 import { useData } from 'vitepress';
-const { theme } = useData();
+const { theme } = useData<ReadonlyThemeConfig>();
 </script>
 
 <style lang="stylus" scoped>

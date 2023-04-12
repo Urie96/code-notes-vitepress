@@ -63,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed, onMounted, ref } from 'vue';
+import { reactive, onMounted, ref, StyleValue } from 'vue';
 import { useData, withBase, useRouter } from 'vitepress';
 import { getOneColor } from '../utils';
 import NoteAbstract from './NoteAbstract.vue';
@@ -74,13 +74,13 @@ const router = useRouter();
 
 const recoShowModule = ref(false);
 
-const { frontmatter, theme } = useData();
+const { frontmatter, theme } = useData<ReadonlyThemeConfig>();
 const state = reactive({
   recoShow: false,
   heroHeight: 0,
 });
 
-const bgImageStyle = {
+const bgImageStyle: StyleValue = {
   textAlign: 'center',
   overflow: 'hidden',
   background: `url(/bg.svg) center/cover no-repeat`,

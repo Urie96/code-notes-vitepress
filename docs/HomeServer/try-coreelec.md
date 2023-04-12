@@ -3,7 +3,7 @@ title: 电视盒子 X96 Max+ 折腾 CoreELEC
 date: 2022-11-12 10:25:00 GMT+0800
 categories: [家庭服务]
 tags: [CoreELEC]
-disable: true
+disable: false
 ---
 
 ::: abstract

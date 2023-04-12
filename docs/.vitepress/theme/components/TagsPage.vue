@@ -19,7 +19,7 @@ import TagList from './TagList.vue';
 import NoteAbstract from './NoteAbstract.vue';
 import { useData, inBrowser, useRoute } from 'vitepress';
 
-const { theme } = useData();
+const { theme } = useData<ReadonlyThemeConfig>();
 
 const paginationChange = () => {
   setTimeout(() => {
@@ -53,9 +53,7 @@ onMounted(() => {
 });
 
 const tagPages = computed(() => {
-  const res = pages.filter(
-    (v: any) => v.tags && v.tags.includes(currentTag.value)
-  );
+  const res = pages.filter((v) => v.tags && v.tags.includes(currentTag.value));
   return res.length ? res : pages;
 });
 </script>

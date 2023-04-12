@@ -13,13 +13,13 @@ export async function highlight() {
     highlighter = await getHighlighter({
         themes: [shikiTheme],
     });
-    const _httpGrammer: any = httpGrammar;
+    const _httpGrammer = httpGrammar;
     await highlighter.loadLanguage({
         id: 'http',
         scopeName: 'source.http',
         grammar: _httpGrammer,
     });
-    const _zshGrammer: any = zshGrammer;
+    const _zshGrammer = zshGrammer;
     await highlighter.loadLanguage({
         id: 'zsh',
         scopeName: 'source.zsh',

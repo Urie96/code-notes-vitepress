@@ -3,3 +3,4 @@ dist
 .env
 .temp
 .cache
+docs/.vitepress/cache

@@ -24,7 +24,7 @@ import { setStoragePage, getStoragePage } from '../utils/';
 
 const props = defineProps({
   data: {
-    type: Array,
+    type: Array<Page>,
     default: [],
   },
   currentTag: {

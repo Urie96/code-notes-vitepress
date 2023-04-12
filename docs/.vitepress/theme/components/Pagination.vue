@@ -38,7 +38,7 @@
           style="background-color: var(--vp-c-bg)"
         />
       </span>
-      <span class="jump gobtn" @click="jumpPage(changePage)">
+      <span class="jump gobtn" @click="jumpPage(parseInt(changePage))">
         {{ pagationLocales.go }}
       </span>
     </div>
@@ -118,9 +118,7 @@ const goNext = () => {
   }
 };
 
-const jumpPage = (id: any) => {
-  const numId = parseInt(id);
-
+const jumpPage = (numId: number) => {
   if (numId <= pages.value && numId > 0) {
     emit('getCurrentPage', numId);
     return;

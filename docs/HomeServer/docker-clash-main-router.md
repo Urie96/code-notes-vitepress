@@ -146,6 +146,23 @@ $ sudo iptables -t nat -I PREROUTING -i enp4s0 -j CLASH
 $ # 配置enp4s0网卡进来的包走CLASH链
 ```
 
+> <Badge text="2023.02.21+" />
+> 1. 配置主路由本机走代理：
+>
+> - Dockerfile 里添加一行`USER 0:2023`，以帮助 iptables 区分 clash 的出流量。
+>
+> - 启动脚本`iptables.sh`添加一行：
+>
+> ```zsh
+> $ iptables -t nat -A OUTPUT -p tcp -m owner ! --gid-owner 2023 -j CLASH # 除了clash的出流量，都转发到CLASH链
+> ```
+>
+> 2. 避免直接请求透明代理端口导致流量无限回环打满 CPU：
+>
+> ```zsh
+> $ iptables -A OUTPUT -d 192.168.1.7 -p tcp --dport 7892 -m owner --gid-owner 2023 -j REJECT
+> ```
+
 ## 配置 DHCP 服务
 
 最后就是配置 DHCP 服务，实现对 LAN 侧设备的 IP、子网掩码、网关、DNS 的自动配置。

@@ -31,7 +31,7 @@ import SWPopup from './SWPopup.vue';
 import PageInfo from './PageInfo.vue';
 import Valine from './Valine.vue';
 
-const { frontmatter } = useData();
+const { frontmatter } = useData<ReadonlyThemeConfig>();
 
 const { Layout } = DefaultTheme;
 

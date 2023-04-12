@@ -8,7 +8,7 @@
 import { onMounted, watch } from 'vue';
 import { useRoute, useData } from 'vitepress';
 
-const { theme } = useData();
+const { theme } = useData<ReadonlyThemeConfig>();
 
 const initValine = async () => {
   const { default: Valine } = await import('valine');

@@ -42,7 +42,8 @@
 
 <script setup lang="ts">
 import { useData, useRouter } from 'vitepress';
-const { theme } = useData();
+const data = useData<ReadonlyThemeConfig>();
+const { theme } = data;
 
 const router = useRouter();
 
@@ -69,8 +70,8 @@ const props = defineProps({
 });
 
 const formatDateValue = (timestamp: number) => {
-  const { lang } = theme as any;
-  return new Intl.DateTimeFormat(lang).format(new Date(timestamp));
+  const { lang } = data;
+  return new Intl.DateTimeFormat(lang.value).format(new Date(timestamp));
 };
 
 const getPath = () => window.location.pathname;

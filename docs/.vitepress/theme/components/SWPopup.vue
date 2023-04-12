@@ -32,7 +32,7 @@ const reload = () => {
 addEventListener('sw-updated', () => {
   enable.value = true;
 });
-const emit = (name: string, event?: any) => {
+const emit = (name: string, eventInitDict?: CustomEventInit<unknown>) => {
   window.dispatchEvent(new CustomEvent(name, event));
 };
 register('/service-worker.js', {
@@ -58,7 +58,7 @@ register('/service-worker.js', {
       'No internet connection found. App is running in offline mode.'
     );
   },
-  error(error: any) {
+  error(error: Error) {
     console.error('Error during service worker registration:', error);
   },
 });

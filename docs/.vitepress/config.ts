@@ -1,11 +1,13 @@
-import { UserConfig, DefaultTheme, createMarkdownRenderer } from 'vitepress';
+import { UserConfig, createMarkdownRenderer } from 'vitepress';
 import container from 'markdown-it-container';
 import uml from './lib/markdown-it-uml';
 import matter from 'gray-matter';
 import fg from 'fast-glob';
 import { highlight } from './highlight';
 
-export default async () => {
+type MarkdownIt = Awaited<ReturnType<typeof createMarkdownRenderer>>;
+
+export default async (): Promise<UserConfig<ThemeConfig>> => {
     const pageData = await getPageData();
     return {
         outDir: '../dist',
@@ -93,7 +95,46 @@ export default async () => {
                 appId: 'EWJHIHWDFQ',
                 apiKey: 'db89e85da0a58d7078b240288ca7e81d',
                 indexName: 'code_notes',
-                buttonText: '搜索',
+                placeholder: '搜索文档',
+                translations: {
+                    button: {
+                        buttonText: '搜索文档',
+                        buttonAriaLabel: '搜索文档',
+                    },
+                    modal: {
+                        searchBox: {
+                            resetButtonTitle: '清除查询条件',
+                            resetButtonAriaLabel: '清除查询条件',
+                            cancelButtonText: '取消',
+                            cancelButtonAriaLabel: '取消',
+                        },
+                        startScreen: {
+                            recentSearchesTitle: '搜索历史',
+                            noRecentSearchesText: '没有搜索历史',
+                            saveRecentSearchButtonTitle: '保存至搜索历史',
+                            removeRecentSearchButtonTitle: '从搜索历史中移除',
+                            favoriteSearchesTitle: '收藏',
+                            removeFavoriteSearchButtonTitle: '从收藏中移除',
+                        },
+                        errorScreen: {
+                            titleText: '无法获取结果',
+                            helpText: '你可能需要检查你的网络连接',
+                        },
+                        footer: {
+                            selectText: '选择',
+                            navigateText: '切换',
+                            closeText: '关闭',
+                            searchByText: '搜索提供者',
+                        },
+                        noResultsScreen: {
+                            noResultsText: '无法找到相关结果',
+                            suggestedQueryText: '你可以尝试查询',
+                            reportMissingResultsText:
+                                '你认为该查询应该有结果？',
+                            reportMissingResultsLinkText: '点击反馈',
+                        },
+                    },
+                },
             },
             sidebar: getSidebar(pageData.pages),
             pageData: pageData,
@@ -101,7 +142,7 @@ export default async () => {
                 { text: '主页', link: '/' },
                 {
                     text: '分类',
-                    items: pageData.categories.map((v: any) => ({
+                    items: pageData.categories.map((v) => ({
                         text: v.name,
                         link: `/categories/?category=${v.name}`,
                     })),
@@ -113,12 +154,14 @@ export default async () => {
                     text: '我的网页',
                     items: [
                         { text: 'HackBook', link: 'https://book.lubui.com' },
-                        { text: '美好回忆', link: 'http://cro.cab:2342' },
+                        {
+                            text: '美好回忆',
+                            link: 'http://home.lubui.com:2342',
+                        },
                         {
                             text: '在一起计时器',
                             link: 'https://huyue.lubui.com',
                         },
-                        { text: '悦娃的工具', link: 'https://yue.lubui.com' },
                     ],
                 },
             ],
@@ -129,46 +172,48 @@ export default async () => {
                 lang: 'zh',
             },
         },
-    } as UserConfig<DefaultTheme.Config>;
+    };
 };
 
-function getSidebar(pages: any) {
-    const categories: any = {};
+function getSidebar(pages: Page[]) {
+    const categories: { [key: string]: SidebarItem[] } = {};
 
-    pages.forEach((v: any) => {
-        const sideBarItem = {
+    pages.forEach((v) => {
+        const sideBarItem: SidebarItem = {
             text: v.title || '未命名文件',
             link: v.link,
             date: v.date,
             sort: v.sort,
         };
-        (v.categories || []).forEach((cate: any) => {
+        v.categories?.forEach((cate) => {
             categories[cate] = categories[cate] || [];
             categories[cate].push(sideBarItem);
         });
     });
-    const sidebars: DefaultTheme.Sidebar = [];
+    const sidebars: Sidebar = [];
     for (const cate in categories) {
         sidebars.push({
             text: cate,
             items: categories[cate].sort(
-                (a: any, b: any) => a.sort - b.sort || b.date - a.date,
+                (a, b) => a.sort - b.sort || b.date - a.date,
             ),
         });
     }
-    sidebars.sort((a: any, b: any) => b.items[0].date - a.items[0].date);
+    sidebars.sort((a, b) => b.items[0].date - a.items[0].date);
     return sidebars;
 }
 
-function useContainer(md: any) {
+function useContainer(md: MarkdownIt) {
     return md
         .use(container, 'row', {
+            // rome-ignore lint/suspicious/noExplicitAny: <explanation>
             render: (tokens: any, idx: number) =>
                 tokens[idx].nesting === 1
                     ? `<div class="custom-block row">\n`
                     : '</div>\n',
         })
         .use(container, 'abstract', {
+            // rome-ignore lint/suspicious/noExplicitAny: <explanation>
             render: (tokens: any, idx: number) =>
                 tokens[idx].nesting === 1
                     ? `<div class="custom-block-abstract tip vp-doc">\n`
@@ -186,36 +231,35 @@ async function getPageData() {
     const md = await createMarkdownRenderer(cwd);
     useContainer(md);
 
-    const pages = filePathList
-        .map((filePath) => {
-            const mdFile = matter.read(filePath, {
-                excerpt: true,
-                excerpt_separator: '<!-- more -->',
-            });
-            if (mdFile.data.layout === 'page' || mdFile.data.disable === true) {
-                return;
-            }
-            return {
-                sort: 1 << 30,
-                categories: [],
-                tags: [],
-                ...mdFile.data,
-                link: getLink(filePath),
-                date: Date.parse(mdFile.data.date),
-                excerpt: md.render(mdFile.excerpt!),
-            };
-        })
-        .filter((v) => v)
-        .sort((a: any, b: any) => b.date - a.date);
+    const pages: Page[] = [];
 
-    const categories: any = [];
-    const tags: any = [];
+    filePathList.forEach((filePath) => {
+        const mdFile = matter.read(filePath, {
+            excerpt: true,
+            excerpt_separator: '<!-- more -->',
+        });
+        if (mdFile.data.layout === 'page' || mdFile.data.disable === true) {
+            return;
+        }
+        pages.push({
+            sort: 1 << 30,
+            categories: [],
+            tags: [],
+            ...mdFile.data,
+            link: getLink(filePath),
+            date: Date.parse(mdFile.data.date),
+            excerpt: md.render(mdFile.excerpt || ''),
+        });
+    });
 
-    pages.forEach((v: any) => {
+    pages.sort((a, b) => b.date - a.date);
+
+    const categories: Category[] = [];
+    const tags: Tag[] = [];
+
+    pages.forEach((v: Page) => {
         v.categories.forEach((cateName: string) => {
-            const category = categories.filter(
-                (v: any) => v.name === cateName,
-            )?.[0];
+            const category = categories.filter((v) => v.name === cateName)?.[0];
             if (category) {
                 category.num++;
             } else {
@@ -226,7 +270,7 @@ async function getPageData() {
             }
         });
         v.tags.forEach((tagName: string) => {
-            const tag = tags.filter((v: any) => v.name === tagName)?.[0];
+            const tag = tags.filter((v) => v.name === tagName)?.[0];
             if (tag) {
                 tag.num++;
             } else {

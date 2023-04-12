@@ -39,7 +39,7 @@ const mermaid2HTML = (code) => {
 
 const plant2HTML = (code) => {
     const diagramName = 'uml';
-    var zippedCode = deflate.encode64(
+    const zippedCode = deflate.encode64(
         deflate.zip_deflate(
             unescape(
                 encodeURIComponent(

@@ -15,7 +15,7 @@ export const getStoragePage = () => {
     return parseInt(currentPage.page);
 };
 
-export const setStoragePage = (page: any) => {
+export const setStoragePage = (page: number) => {
     const path = window.location.pathname + window.location.search;
     sessionStorage.setItem('currentPage', JSON.stringify({ page, path }));
 };
