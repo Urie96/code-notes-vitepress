@@ -8,7 +8,7 @@ declare module '*.vue' {
 type StyleValue = Partial<CSSStyleDeclaration>;
 
 declare module 'valine';
-declare module 'shiki';
+// declare module 'shiki';
 
 interface Page {
     sort: number;

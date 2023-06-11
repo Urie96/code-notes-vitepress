@@ -30,7 +30,7 @@
   "code": {
     "prefix": "co",
     "scope": "markdown",
-    "body": "``` $1\n```"
+    "body": "```$1\n```"
   },
   "link": {
     "prefix": "lnk",
@@ -41,6 +41,11 @@
     "prefix": "tip",
     "scope": "markdown",
     "body": "::: tip $1\n:::"
+  },
+  "group": {
+    "prefix": "group",
+    "scope": "markdown",
+    "body": "::: code-group\n\n```$1 [$2]\n```\n\n:::"
   },
   "row": {
     "prefix": "row",

@@ -3,7 +3,7 @@ import container from 'markdown-it-container';
 import uml from './lib/markdown-it-uml';
 import matter from 'gray-matter';
 import fg from 'fast-glob';
-import { highlight } from './highlight';
+// import { highlight } from './highlight';
 
 type MarkdownIt = Awaited<ReturnType<typeof createMarkdownRenderer>>;
 
@@ -21,7 +21,7 @@ export default async (): Promise<UserConfig<ThemeConfig>> => {
                 useContainer(md);
                 md.use(uml);
             },
-            highlight: await highlight(),
+            // highlight: await highlight(),
         },
         // ignoreDeadLinks: true,
         head: [
