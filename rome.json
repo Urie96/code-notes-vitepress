@@ -10,7 +10,7 @@
     }
   },
   "formatter": {
-    "indentSize": 4,
+    "indentSize": 2,
     "indentStyle": "space",
     "ignore": [
       "md5.js"

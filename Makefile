@@ -8,7 +8,7 @@ image:
 	docker build -t hub.lubui.com/code-notes-vitepress .
 	docker push hub.lubui.com/code-notes-vitepress
 
-deploy:
+deploy: image
 	ssh lubui.com sudo kubectl scale --replicas=0 deployment code-notes-vitepress
 	ssh lubui.com sudo kubectl scale --replicas=1 deployment code-notes-vitepress
 

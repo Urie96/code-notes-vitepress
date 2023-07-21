@@ -5,9 +5,9 @@ categories: [其它]
 tags: []
 ---
 
-## 在`tmux`中ssh到其他主机`clear`命令报错`terminals database is inaccessible`
+## 在`tmux`中 ssh 到其他主机`clear`命令报错`terminals database is inaccessible`
 
-原因是在ssh server中TERM环境变量是tmux-color-256，但是~/.terminfo中没有对应的信息，一种解决办法是在ssh client中给ssh命令配置TERM环境变量：
+原因是在 ssh server 中 TERM 环境变量是 tmux-color-256，但是~/.terminfo 中没有对应的信息，一种解决办法是在 ssh client 中给 ssh 命令配置 TERM 环境变量：
 
 ::: code-group
 
@@ -20,9 +20,10 @@ if status is-interactive
   end
 end
 ```
+
 :::
 
-## 我的Alacritty配置
+## 我的 Alacritty 配置
 
 ```yaml
 # ~/.config/alacritty/alacritty.yml
@@ -38,7 +39,7 @@ font:
   size: 15.0
 ```
 
-安装FiraMono字体：
+安装 FiraMono 字体：
 
 ::: code-group
 
@@ -50,22 +51,23 @@ $ brew install font-fira-mono-nerd-font
 ```zsh [Arch Linux]
 $ yay -S otf-firamono-nerd
 ```
+
 :::
 
-## VS Code通过Remote SSH连接远程服务器超时
+## VS Code 通过 Remote SSH 连接远程服务器超时
 
-在本地VS Code设置中添加：
+在本地 VS Code 设置中添加：
 
 ```json
 // xxx/settings.json
 {
-  "remote.SSH.useLocalServer": false, // [!code focus]
+  "remote.SSH.useLocalServer": false // [!code focus]
 }
 ```
 
-## Linux无法使用Windows免驱设备
+## Linux 无法使用 Windows 免驱设备
 
-为了给Windows提供驱动进行安装，usb免驱设备一开始是在CDROM模式，需要安装`usb_modeswitch`切换模式。
+为了给 Windows 提供驱动进行安装，usb 免驱设备一开始是在 CDROM 模式，需要安装`usb_modeswitch`切换模式。
 
 ```zsh
 # 出现问题
@@ -128,4 +130,72 @@ Discovery started
 [CHG] Controller 90:91:64:28:6C:98 Discovering: yes
 [NEW] Device 3C:9B:A5:64:43:EE 3C-9B-A5-64-43-EE
 ...
+```
+
+## Arch Linux
+
+### 安装 nvidia 驱动
+
+```zsh
+$ sudoedit /etc/pacman.conf # uncomment multilib
+# 为了安装lib32-nvidia-utils
+$ sudo pacman -Sy
+$ sudo pacman -S nvidia nvidia-settings lib32-nvidia-utils
+$ sudoedit /etc/mkinitcpio.conf # delete kms from HOOK
+# 为了关闭内核自带的nouveau驱动，从而使用nvidia驱动
+$ sudo reboot
+
+$ sudo dmesg # 仍然报错，因为nvidia-utils没能禁用nouveau
+[    3.818839] nvidia-nvlink: Nvlink Core is being initialized, major device number 511
+[    3.818844] NVRM: The NVIDIA probe routine was not called for 1 device(s).
+[    3.819827] NVRM: This can occur when a driver such as:
+               NVRM: nouveau, rivafb, nvidiafb or rivatv
+               NVRM: was loaded and obtained ownership of the NVIDIA device(s).
+[    3.819828] NVRM: Try unloading the conflicting kernel module (and/or
+               NVRM: reconfigure your kernel without the conflicting
+               NVRM: driver(s)), then try loading the NVIDIA kernel module
+               NVRM: again.
+[    3.819828] NVRM: No NVIDIA devices probed.
+[    3.819952] nvidia-nvlink: Unregistered Nvlink Core, major device number 511
+$ lsmod | grep -E "nvidia|nouveau" # 仍然加载了nouveau
+nouveau              3440640  0
+drm_ttm_helper         12288  1 nouveau
+ttm                    98304  2 drm_ttm_helper,nouveau
+i2c_algo_bit           20480  1 nouveau
+mxm_wmi                12288  1 nouveau
+drm_display_helper    204800  1 nouveau
+video                  73728  1 nouveau
+wmi                    45056  4 video,wmi_bmof,mxm_wmi,nouveau
+$ echo 'blacklist nouveau'|sudo tee /etc/modprobe.d/nouveau-blacklist.conf # 手动禁用nouveau
+$ sudo mkinitcpio -p linux
+$ sudo reboot
+
+$ lsmod | grep -E "nvidia|nouveau"
+nvidia_drm             94208  0
+nvidia_modeset       1556480  1 nvidia_drm
+nvidia_uvm           3469312  0
+nvidia              62513152  2 nvidia_uvm,nvidia_modeset
+video                  73728  1 nvidia_modeset
+$ nvidia-smi # 成功
+Fri Jul  7 13:25:33 2023
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.54.03              Driver Version: 535.54.03    CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA GeForce RTX 3060        Off | 00000000:01:00.0 Off |                  N/A |
+|  0%   60C    P0              43W / 170W |      1MiB / 12288MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+$ sudo pacman -S cuda
 ```
