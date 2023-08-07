@@ -2,7 +2,7 @@
 title: 通过Nginx实现业务不感知的单点登录
 date: 2023-07-21 12:38:05 GMT+0800
 categories: [运维]
-tags: []
+tags: [Nginx]
 ---
 
 ::: abstract
