@@ -93,5 +93,10 @@
     "prefix": "b",
     "scope": "markdown",
     "body": "**$1**"
+  },
+  "kbd": {
+    "prefix": "kbd",
+    "scope": "markdown",
+    "body": "<kbd>$1</kbd>"
   }
 }
