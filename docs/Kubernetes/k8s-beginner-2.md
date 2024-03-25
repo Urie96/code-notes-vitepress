@@ -16,7 +16,7 @@ tags: [Kubernetes, Linux]
 
 本地测试非常顺利：
 
-```zsh
+```terminal
 $ docker run -d --rm -p 5000:5000 registry
 Unable to find image 'registry:latest' locally
 latest: Pulling from library/registry
@@ -46,7 +46,7 @@ localhost:5000/busybox:latest
 
 如果不用`localhost`而是使用本机 IP`10.79.40.213`就会出错，因为 Docker 只有在使用 localhost 的时候才用 HTTP，外部 IP 会使用 HTTPS，而 registry 没有配置 HTTPS：
 
-```zsh
+```terminal
 $ docker tag busybox 10.79.40.213:5000/busybox
 $ docker push 10.79.40.213:5000/busybox:latest
 The push refers to repository [10.79.40.213:5000/busybox]
@@ -59,7 +59,7 @@ Error response from daemon: Get https://10.79.40.213:5000/v2/: http: server gave
 
 可以通过`openssl`创建自签名证书，但配置有点复杂，所以使用这个[项目](https://github.com/Fishdrowned/ssl)，它是对`openssl`的封装（但是需要在 Linux 下运行，Mac 上失败了）。
 
-```zsh
+```terminal
 $ git clone https://github.com/Fishdrowned/ssl.git
 Cloning into 'ssl'...
 remote: Enumerating objects: 112, done.
@@ -124,7 +124,7 @@ func panicIfErr(err error) {
 
 `curl`通过`--cacert`选项选择根证书验证：
 
-```zsh
+```terminal
 $ sudo sh -c "echo '127.0.0.1 devbox' >>/etc/hosts"
 $ go run main.go &
 $ curl https://devbox:8888 --cacert out/root.crt
@@ -133,7 +133,7 @@ hello, world%
 
 Debian 安装系统根证书：
 
-```zsh
+```terminal
 $ sudo apt-get install ca-certificates
 $ sudo cp out/root.crt /usr/local/share/ca-certificates/
 $ sudo update-ca-certificates
@@ -147,7 +147,7 @@ hello, world%
 
 Debian 卸载根证书：
 
-```zsh
+```terminal
 $ sudo rm /usr/local/share/ca-certificates/root.crt
 $ sudo cp out/root.crt /usr/local/share/ca-certificates/
 $ sudo update-ca-certificates --fresh
@@ -175,7 +175,7 @@ More details here: https://curl.haxx.se/docs/sslcerts.html
 
 先在阿里云上配置 DNS 解析，将`devbox.sweetlove.top`解析为 devbox 的 IP。然后申请这个域名的证书，下载到 devbox 的`/certs`目录下。
 
-```zsh
+```terminal
 $ ssh root@devbox.sweetlove.top docker run -d \
     --restart=always \
     --name registry \

@@ -111,7 +111,7 @@ int main(int argc, char **argv) {
 
 ::: row
 
-```zsh
+```terminal
 $ ./tcp 8081
 listen port: 8081
 # 等待客户端连接
@@ -121,7 +121,7 @@ received 6 bytes from port 61275: hello
 
 ```
 
-```zsh
+```terminal
 $
 $
 $ nc localhost 8081 # 客户端连接
@@ -142,7 +142,7 @@ TCP 四次挥手时，假设称主动挥手的一方为主动方，另一方为�
 
 所以，当上述的 TCP 服务端与客户端建立连接后，如果主动关闭服务端，则内核会继续占用该端口 60s。
 
-```zsh
+```terminal
 $ ./tcp & # 启动服务端
 [1] 95767
 listen port: 8080
@@ -231,7 +231,7 @@ int main(int argc, char **argv) {
 
 ::: row
 
-```zsh
+```terminal
 $ ./udp 8080
 bind port: 8080
 # 阻塞，等待UDP数据报
@@ -239,7 +239,7 @@ bind port: 8080
 received 4 bytes from port 53462: asd
 ```
 
-```zsh
+```terminal
 $
 $
 $ nc -u 127.0.0.1 8080

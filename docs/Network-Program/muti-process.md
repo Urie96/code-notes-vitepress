@@ -35,7 +35,7 @@ int main() {
 
 运行：
 
-```zsh
+```terminal
 $ ./fork1
 Hello. My pid is: 83196
 Hi. My pid is: 83196
@@ -64,7 +64,7 @@ int main() {
 }
 ```
 
-```zsh
+```terminal
 $ ./fork2 &
 [1] 2704
 father(2704) fork a child(2706)
@@ -129,7 +129,7 @@ while (waitpid(-1, 0, WNOHANG) > 0);
 这样便可以在一次事件处理函数中回收所有的僵尸进程。
 :::
 
-```zsh
+```terminal
 $ ./fork3 &
 [1] 6594
 father(6594) fork a child(6596)
@@ -183,7 +183,7 @@ int main(int argc, char **argv) {
 
 ::: row
 
-```zsh
+```terminal
 # Terminal1 启动服务端
 $ ./tcp-mp 8081
 listen port: 8081
@@ -197,7 +197,7 @@ accept: client port is 64408
 received 14 bytes from port 64408: i am client 2
 ```
 
-```zsh
+```terminal
 # Terminal2 启动客户端1
 $
 $
@@ -208,7 +208,7 @@ i am client 1
 reply: i am client 1
 ```
 
-```zsh
+```terminal
 # Terminal3 启动客户端2
 $
 $
@@ -225,7 +225,7 @@ reply: i am client 2
 
 :::
 
-```zsh
+```terminal
 # Terminal4 查看TCP连接
 $ lsof -i:8081
 COMMAND   PID  USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME

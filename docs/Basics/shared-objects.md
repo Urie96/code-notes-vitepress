@@ -30,7 +30,7 @@ int add(int x, int y) {
 }
 ```
 
-```zsh
+```terminal
 $ gcc add.c -shared -o libadd.so
 $ nm -D libadd.so # nm命令可以看到动态库包含的函数
 00000000000010f9 T add
@@ -58,7 +58,7 @@ int main()
 
 编译并执行：
 
-```zsh
+```terminal
 $ gcc main.c -L./ -ladd -o main
 # 编译：-L指定动态库的路径，-l指定动态库的名字，动态库不会在编译期间被链接，而是在运行期间被加载
 $ LD_LIBRARY_PATH=$PWD ./main
@@ -78,7 +78,7 @@ int add(int x, int y) {
 
 编译动态库，然后直接执行 main：
 
-```zsh
+```terminal
 $ gcc add.c -shared -o libadd.so
 $ LD_LIBRARY_PATH=$PWD ./main
 -10
@@ -137,7 +137,7 @@ int main()
 }
 ```
 
-```zsh
+```terminal
 $ gcc main2.c -ldl -o main2 # 编译时依赖dl头文件，不依赖libadd动态库
 $ ./main2 # 运行时依赖动态库，但没有手动指定动态库路径，因为是写死在代码里的
 30
@@ -169,7 +169,7 @@ func main() {
 
 然后将`libadd.so`放到`main.go`所在的目录下，执行：
 
-```zsh
+```terminal
 $ go build -o main # 和C语言一样需要在编译时指定动态库的路径
 $ ./main # 如果运行时不指定动态库路径
 ./main: error while loading shared libraries: libadd.so: cannot open shared object file: No such file or directory
@@ -200,7 +200,7 @@ func add(a, b C.int) C.int {
 
 导出 C 动态库：
 
-```zsh
+```terminal
 $ go build -buildmode=c-shared -o libadd.so # 编译成动态库和头文件libadd.h
 $ nm -D
                  U abort
@@ -213,7 +213,7 @@ $ nm -D
 
 导出静态库并与 C 代码静态链接：
 
-```zsh
+```terminal
 $ go build -buildmode=c-archive -o add.a # 会生成add.h头文件
 $ cat <<EOF > _main.c
 #include <stdio.h>
@@ -250,7 +250,7 @@ fn main() {
 }
 ```
 
-```zsh
+```terminal
 $ rustc ./main.rs -l add -L .
 $ LD_LIBRARY_PATH=$PWD ./main
 30
@@ -279,7 +279,7 @@ pub extern "C" fn add(a: i32, b: i32) -> i32 {
 }
 ```
 
-```zsh
+```terminal
 $ tree
 .
 ├── Cargo.toml

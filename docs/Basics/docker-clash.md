@@ -13,7 +13,7 @@ tags: [iptables, Clash, Proxy, Docker]
 
 目录结构：
 
-```zsh
+```terminal
 $ tree
 .
 ├── docker-compose.yml
@@ -172,7 +172,7 @@ services:
 ::: tip
 理论上网络也可以不用 host，改用 macvlan：
 
-```zsh
+```terminal
 $ sudo ip link set enp3s0 promisc on # 开启网卡混杂模式，这样网卡收到的所有目标ip的包都会接入处理
 $ docker network create -d macvlan --subnet=192.168.1.0/24 --gateway=192.168.1.1 -o parent=enp3s0 macnet
 $ docker run --restart=unless-stopped -d --net macnet --ip 192.168.1.35 clash

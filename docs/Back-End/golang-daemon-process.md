@@ -38,7 +38,7 @@ int main() {
 
 **测试：**
 
-```zsh
+```terminal
 $ gcc main.c -o main && ./main
 [1] 1411339
 father(1411339) fork a child(1411340)
@@ -101,7 +101,7 @@ func main() {
 
 **测试：**
 
-```zsh
+```terminal
 $ go run main.go
 父进程： 1462007
 子进程 1462012

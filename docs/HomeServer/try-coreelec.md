@@ -18,14 +18,14 @@ disable: false
 
 默认是启动 CoreELEC，启动后可以在 Kodi 界面选择重启到安卓。
 
-```zsh
+```terminal
 $ uname -a
 Linux CoreELEC 4.9.269 #1 SMP PREEMPT Wed Jul 27 09:00:53 CEST 2022 aarch64 GNU/Linux
 ```
 
 ## 安装包管理器
 
-```zsh
+```terminal
 $ apt-get # debian包管理器用不了
 
  There is no working 'apt-get'.
@@ -133,7 +133,7 @@ $ opkg list # 可以用这个命令替代apt了，不过也是有很多软件没
 
 docker 需要用 Kodi 的插件里面的 CoreELEC 库里的插件来装。
 
-```zsh
+```terminal
 $ docker version # 还挺新的
 Client:
  Version:           19.03.15
@@ -166,7 +166,7 @@ Server:
 
 ## Shell 中文
 
-```zsh
+```terminal
 $ cat /storage/.inputrc # ssh上来输入不了中文，需要添加一下这个
 set meta-flag on
 set convert-meta off
@@ -214,7 +214,7 @@ $ # 有个国人大佬fork
 
 如果游戏是中文，那 EmuELEC 里的游戏列表就会出现乱码，需要下载中文字体，放到指定位置：
 
-```zsh
+```terminal
 $ cd ~/.emulationstation/themes/simple-dark # 系统自带的仅有一个simple-dark主题
 $ cat simple-dark.xml
 ...

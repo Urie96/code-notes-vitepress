@@ -29,7 +29,7 @@ console.log(privateKey.toString('hex')); // 3656b14103bb3e92a5fcfcdb6a3049435459
 
 ## 项目初始化
 
-```zsh
+```terminal
 $ mkdir helloworld && cd helloworld && npm init -y && npm i -S hardhat
 added 305 packages, and audited 306 packages in 1m
 
@@ -89,7 +89,7 @@ contract HelloWorld {
 
 ### 编译 contract
 
-```zsh
+```terminal
 $ npx hardhat compile
 Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
 --> contracts/1_HelloWorld.sol
@@ -190,7 +190,7 @@ main();
 
 通过安全帽执行上面的代码，合约被部署到节点上，并且节点的日志也打印了相关信息：
 
-```zsh
+```terminal
 $ npx hardhat run deploy.js
 (node:21671) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -263,7 +263,7 @@ async function main() {
 main();
 ```
 
-```zsh
+```terminal
 $ node interact.js
 The message is: hello world!
 Updating the message...

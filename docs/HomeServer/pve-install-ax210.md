@@ -21,7 +21,7 @@ tags: [Linux]
 
 `/lib/firmware/`目录下对于`iwlwifi-ty-a0-gf-a0`前缀仅保留编号为 **59** 的驱动：
 
-```zsh
+```terminal
 $ ls /lib/firmware/ |grep iwlwifi-ty-a0-gf-a0
 iwlwifi-ty-a0-gf-a0-59.ucode
 iwlwifi-ty-a0-gf-a0-63.ucode.bak # 其余编号的把它删了，或者重命名改掉
@@ -53,7 +53,7 @@ $ ip a|grep wlp6s0 # 安装成功
 
 在[这里](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/intel)下载`ibt-0041-0041.ddc`和`ibt-0041-0041.sfi`放到`/lib/firmware/intel`目录下。
 
-```zsh
+```terminal
 $ cd /lib/firmware/intel
 $ sudo wget https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/intel/ibt-0041-0041.ddc
 ...
@@ -84,7 +84,7 @@ Devices:
 
 ## 连接 WiFi
 
-```zsh
+```terminal
 $ sudo iwlist wlp6s0 scan|grep SSID # 扫描WiFi
                     ESSID:"CU_urie"
                     ESSID:"urie_home"
@@ -112,7 +112,7 @@ wlp6s0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
 
 > AX210 这块网卡的 AP 模式真够废的，由于 Intel 的合规要求，这块网卡只能用 2.5GHz，并且速度只有 10Mbps 左右。
 
-```zsh
+```terminal
 $ sudo apt install hostapd
 ...
 $ sudo systemctl unmask hostapd # 启用hostapd
@@ -211,7 +211,7 @@ ieee80211n=1
 ieee80211d=1
 ```
 
-```zsh
+```terminal
 $ sudo ip addr add 192.168.3.1/24 dev wlp6s0 # 给无线网卡分配ip
 $ sudo start hostapd
 $ svc status hostapd
@@ -259,7 +259,7 @@ subnet 192.168.3.0 netmask 255.255.255.0 {
 
 ### 配置 NAT
 
-```zsh
+```terminal
 $ sudo iptables -t nat -I POSTROUTING -s 192.168.3.0/24 -o wlp6s0 -j MASQUERADE
 ```
 
@@ -271,7 +271,7 @@ $ sudo iptables -t nat -I POSTROUTING -s 192.168.3.0/24 -o wlp6s0 -j MASQUERADE
 
 在`/etc/network/interfaces`文件底部追加虚拟网桥的信息，并配置 IP：
 
-```zsh
+```terminal
 $ cat <<EOF | sudo tee -a /etc/network/interfaces
 auto vmbr1
 iface vmbr1 inet static
@@ -302,7 +302,7 @@ vmbr1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 
 ## 使用蓝牙
 
-```zsh
+```terminal
 $ sudo hcitool scan # 扫描周围蓝牙
 Scanning ...
         FC:E8:06:8A:62:C3       EDIFIER R101V
@@ -320,7 +320,7 @@ Connection successful
 
 ### 连接蓝牙音箱播放音频
 
-```zsh
+```terminal
 $ sudo apt install pulseaudio-module-bluetooth # 蓝牙音频需要安装这个
 ...
 $ ffplay -nodisp -autoexit example.wav

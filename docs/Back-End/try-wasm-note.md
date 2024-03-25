@@ -10,7 +10,7 @@ disable: true
 
 安装 **WasmEdge** :
 
-```zsh
+```terminal
 $ curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
 Detected Darwin-arm64
 No path provided
@@ -42,7 +42,7 @@ func main() {
 }
 ```
 
-```zsh
+```terminal
 $ tinygo build -wasm-abi=generic -target=wasi -o main.wasm main.go
 $ ls -l main.wasm
 -rwxr-xr-x  1 urie  staff  412011 11 25 10:59 main.wasm
@@ -59,7 +59,7 @@ Darwin yangruideMac-mini.local 22.1.0 Darwin Kernel Version 22.1.0: Sun Oct  9 2
 ::: tip
 通过下面的 Go 命令编译的 Wasm 只能用于浏览器(可能是我命令不对吧)，用 `wasmedge` 会报错：
 
-```zsh
+```terminal
 $ GOARCH=wasm GOOS=js go build -o test.wasm main.go
 $ wasmedge test.wasm
 instantiation failed: unknown import, Code: 0x62
@@ -75,7 +75,7 @@ go: unsupported GOOS/GOARCH pair darwin/wasm
 
 然后把上面生成的 main.wasm 编译产物复制到 Linux X86 上并运行：
 
-```zsh
+```terminal
 $ scp ./main.wasm home.lubui.com:/tmp
 main.wasm                                          100%  402KB  16.5MB/s   00:00
 $ ssh home.lubui.com wasmedge /tmp/main.wasm # 可以直接运行
@@ -86,7 +86,7 @@ Linux pve 5.15.30-2-pve #1 SMP PVE 5.15.30-3 (Fri, 22 Apr 2022 18:08:27 +0200) x
 
 对于上面生成的 main.wasm ，wasmedge 是以解释器模式来执行的，启动速度较慢。可以使用 wasmedge 的 AOT（Ahead Of Time）编译器进一步优化：
 
-```zsh
+```terminal
 $ wasmedgec main.wasm main_aot.wasm
 [2022-11-25 11:54:49.886] [info] compile start
 [2022-11-25 11:54:49.908] [info] verify start

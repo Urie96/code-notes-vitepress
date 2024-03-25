@@ -11,7 +11,7 @@ tags: []
 
 ::: code-group
 
-```fish [fish]
+```fish
 # ~/.config/fish/config.fish
 if status is-interactive
   if test "$TMUX" != ""
@@ -43,12 +43,12 @@ font:
 
 ::: code-group
 
-```zsh [Mac OS]
+```terminal [Mac OS]
 $ brew tap homebrew/cask-fonts
 $ brew install font-fira-mono-nerd-font
 ```
 
-```zsh [Arch Linux]
+```terminal [Arch Linux]
 $ yay -S otf-firamono-nerd
 ```
 
@@ -69,7 +69,7 @@ $ yay -S otf-firamono-nerd
 
 为了给 Windows 提供驱动进行安装，usb 免驱设备一开始是在 CDROM 模式，需要安装`usb_modeswitch`切换模式。
 
-```zsh
+```terminal
 # 出现问题
 $ lsusb # 模式是在CDROM
 Bus 003 Device 003 .... [CDROM MODE]
@@ -136,7 +136,7 @@ Discovery started
 
 ### 安装 nvidia 驱动
 
-```zsh
+```terminal
 $ sudoedit /etc/pacman.conf # uncomment multilib
 # 为了安装lib32-nvidia-utils
 $ sudo pacman -Sy

@@ -18,7 +18,7 @@ tags: [BlockChain, Ethereum]
 
 > `geth`是以太坊的 Golang 实现，可用于开启一个节点
 
-```zsh
+```terminal
 $ wget https://github.com/ethereum/go-ethereum/archive/refs/tags/v1.10.20.tar.gz
 $ tar xf v1.10.20.tar.gz
 $ rm v1.10.20.tar.gz
@@ -61,7 +61,7 @@ spec:
 
 部署：
 
-```zsh
+```terminal
 $ kubectl apply -f bootnode.yml
 deployment.apps/ether-bootnode configured
 $ k logs ether-bootnode-65c99bbd48-zfb8z
@@ -81,7 +81,7 @@ INFO [07-22|07:19:51.215] New local node record                    seq=1,658,474
 
 这里使用 geth 来生成一个新账户：
 
-```zsh
+```terminal
 $ geth account new
 INFO [07-22|15:33:13.456] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [07-22|15:33:13.456] Smartcard socket not found, disabling    err="stat /run/pcscd/pcscd.comm: no such file or directory"
@@ -134,7 +134,7 @@ $ cat /home/ubuntu/.ethereum/keystore/UTC--2022-07-22T07-33-22.567042175Z--811a4
 
 以太坊官方提供了一个命令行交互工具`puppeth`，可用于生成一个 json 配置信息：
 
-```zsh
+```terminal
 $ puppeth
 +-----------------------------------------------------------+
 | Welcome to puppeth, your Ethereum private network manager |
@@ -387,7 +387,7 @@ spec:
 
 部署成功后，可以看到两个以太坊节点与 bootnode 节点均已相互连接上。
 
-```zsh
+```terminal
 $ kubectl apply -f node.yml
 $ kubectl get pods -o wide
 NAME                               READY   STATUS    RESTARTS          AGE     IP             NODE        NOMINATED NODE   READINESS GATES
@@ -412,7 +412,7 @@ INFO [07-27|03:26:04.731] Looking for peers                        peercount=1 t
 
 ## 通过 HTTP 请求节点
 
-```zsh
+```terminal
 $ # 查区块高度
 $ curl --request POST \
   --url http://10.244.0.157:8545/ \
@@ -453,7 +453,7 @@ $ curl --request POST \
 
 ## 发送交易
 
-```zsh
+```terminal
 $ # 给另一个账户发送以太币，eth_sendTransaction需要该节点已解锁付款方的账户
 $ curl --request POST \
   --url http://10.244.0.157:8545/ \

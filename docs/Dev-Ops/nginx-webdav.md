@@ -74,9 +74,9 @@ worker_processes auto;
 error_log /var/log/nginx/error.log notice;
 pid /var/run/nginx.pid;
 
-# 加载动态模块 // [!code focus]
-load_module /usr/lib/nginx/modules/ngx_http_dav_ext_module.so; // [!code focus]
-load_module /usr/lib/nginx/modules/ngx_http_headers_more_filter_module.so; // [!code focus]
+# 加载动态模块 # [!code focus]
+load_module /usr/lib/nginx/modules/ngx_http_dav_ext_module.so; # [!code focus]
+load_module /usr/lib/nginx/modules/ngx_http_headers_more_filter_module.so; # [!code focus]
 
 events {
   worker_connections 1024;
@@ -154,7 +154,7 @@ server {
 WebDAV 使用 http basic 认证，nginx 需要 htpasswd 文件来校验客户端传来的用户名密码。
 这里通过 docker alpine 现安装工具来生成：
 
-```zsh
+```terminal
 $ docker run --rm -it alpine sh -c 'apk add apache2-utils && htpasswd -nbm admin password'
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/main/x86_64/APKINDEX.tar.gz                                         │
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/community/x86_64/APKINDEX.tar.gz                                    │
@@ -204,7 +204,7 @@ services:
 
 方法二：通过 `mount_webdav` 命令实现：
 
-```zsh
+```terminal
 $ sudo mkdir -p /Volumes/webdav/
 $ sudo mount_webdav -s -i https://my.webdav.server:port/ /Volumes/webdav/
 Username: admin

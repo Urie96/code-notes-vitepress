@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
 
 ::: row
 
-```zsh
+```terminal
 # Terminal1 启动服务端
 $ ./tcp-mt 8082
 listen port: 8082
@@ -69,7 +69,7 @@ accept: client port is 51543
 received 6 bytes from port 51543: world
 ```
 
-```zsh
+```terminal
 # Terminal2 启动客户端1
 $
 $
@@ -80,7 +80,7 @@ hello # 标准输入
 reply: hello
 ```
 
-```zsh
+```terminal
 # Terminal3 启动客户端2
 $
 $
@@ -97,7 +97,7 @@ reply: world
 
 :::
 
-```zsh
+```terminal
 # Terminal4 查看网络连接
 $ lsof -i:8082
 COMMAND   PID  USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
@@ -209,7 +209,7 @@ int main() {
 
 ::: row
 
-```zsh
+```terminal
 $ ./http-mt 8081
 listen port: 8081
 
@@ -224,7 +224,7 @@ Accept: */*
 client(port: 52122) closed!
 ```
 
-```zsh
+```terminal
 $
 $
 $ curl localhost:8081

@@ -212,7 +212,7 @@ int main() {
 }
 ```
 
-```zsh
+```terminal
 $ ./block_queue
 1
 2
@@ -258,7 +258,7 @@ int main() {
 }
 ```
 
-```zsh
+```terminal
 $ ./thread-pool
 thread 23670784: start # 子线程阻塞在block_queue_pop()
 thread 22597632: start

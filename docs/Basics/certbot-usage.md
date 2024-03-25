@@ -16,7 +16,7 @@ tags: [Linux]
 
 Debian：
 
-```zsh
+```terminal
 $ sudo apt install certbot
 $ certbot --version
 certbot 0.31.0
@@ -24,7 +24,7 @@ certbot 0.31.0
 
 Mac OS:
 
-```zsh
+```terminal
 $ brew install certbot
 $ certbot --version
 certbot 1.21.0
@@ -84,7 +84,7 @@ func updateDNS(txt string) error {
 
 ## 生成证书
 
-```zsh
+```terminal
 $ sudo certbot certonly \
   -d \*.sweetlove.top \
   # 通配符域名 \
@@ -130,7 +130,7 @@ Found the following certs:
 
 ## 更新证书
 
-```zsh
+```terminal
 $ sudo certbot renew --force-renewal
 Saving debug log to /var/log/letsencrypt/letsencrypt.log
 

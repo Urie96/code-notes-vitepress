@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
 
 ::: row
 
-```zsh
+```terminal
 $ ./select 8088
 listen port: 8088
 # 阻塞在此处，等待标准输入“或”TCP连接到来
@@ -100,7 +100,7 @@ world # 键盘输入
 stdin: world
 ```
 
-```zsh
+```terminal
 $
 $
 $ nc 127.0.0.1 8088

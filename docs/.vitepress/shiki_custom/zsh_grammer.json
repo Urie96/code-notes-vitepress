@@ -1,0 +1,220 @@
+{
+  "scopeName": "source.terminal",
+  "fileTypes": [
+    "terminal"
+  ],
+  "name": "terminal",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#signal"
+    },
+    {
+      "include": "#input"
+    },
+    {
+      "include": "#output"
+    }
+  ],
+  "repository": {
+    "output": {
+      "patterns": [
+        {
+          "begin": "(?=(\\{(\"|\\n))|(\\[(\"|\\n)))",
+          "end": "(?<=\\}|\\])",
+          "patterns": [
+            {
+              "include": "source.json"
+            }
+          ]
+        }
+      ]
+    },
+    "input": {
+      "patterns": [
+        {
+          "begin": "^(\\$|❯)",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.other.prompt-prefix.terminal"
+            }
+          },
+          "end": "(?<!\\\\\\s*)$",
+          "patterns": [
+            {
+              "include": "#command"
+            },
+            {
+              "include": "#comments"
+            }
+          ]
+        }
+      ]
+    },
+    "command": {
+      "patterns": [
+        {
+          "begin": "([a-zA-Z0-9-_./]+(=)(\\S+)\\s+)?([a-zA-Z0-9-_./]+)",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.type"
+            },
+            "2": {
+              "name": "keyword.operator.terminal"
+            },
+            "3": {
+              "name": "string.terminal"
+            },
+            "4": {
+              "name": "entity.name.function.terminal"
+            }
+          },
+          "end": "(&&)|(\\|{1,2})|;|((?<!\\\\\\s*)$)",
+          "endCaptures": {
+            "0": {
+              "name": "keyword.operator.terminal"
+            }
+          },
+          "name": "string.terminal",
+          "patterns": [
+            {
+              "include": "#backquote"
+            },
+            {
+              "include": "#flag"
+            },
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#environ"
+            },
+            {
+              "include": "#string"
+            },
+            {
+              "include": "#operator"
+            }
+          ]
+        }
+      ]
+    },
+    "operator": {
+      "match": "&|\\||&|>|<|;|\\\\|=|\\?|\\*|%",
+      "name": "keyword.operator.terminal"
+    },
+    "flag": {
+      "patterns": [
+        {
+          "begin": "\\s(-{1,2}[a-zA-Z0-9-_]+)(=)?",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.other.attribute-name.terminal"
+            },
+            "2": {
+              "name": "keyword.operator.terminal"
+            }
+          },
+          "end": "(?=\\s)",
+          "name": "string.terminal",
+          "patterns": [
+            {
+              "include": "#string"
+            }
+          ]
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "match": "\\s*\\#.*$",
+          "name": "comment.terminal"
+        }
+      ]
+    },
+    "string": {
+      "patterns": [
+        {
+          "include": "#qstring-single"
+        },
+        {
+          "include": "#qstring-double"
+        }
+      ]
+    },
+    "qstring-single": {
+      "patterns": [
+        {
+          "begin": "'",
+          "end": "'",
+          "name": "string.terminal",
+          "patterns": [
+            {
+              "include": "#string-character-escape"
+            },
+            {
+              "include": "#backquote"
+            }
+          ]
+        }
+      ]
+    },
+    "qstring-double": {
+      "patterns": [
+        {
+          "begin": "\"",
+          "end": "\"",
+          "name": "string.terminal",
+          "patterns": [
+            {
+              "include": "#string-character-escape"
+            },
+            {
+              "include": "#environ"
+            },
+            {
+              "include": "#backquote"
+            }
+          ]
+        }
+      ]
+    },
+    "string-character-escape": {
+      "name": "entity.other.attribute-name",
+      "match": "\\\\(x\\h{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.|$)"
+    },
+    "environ": {
+      "name": "entity.name.type",
+      "match": "\\$[a-zA-Z0-9_-]+"
+    },
+    "backquote": {
+      "patterns": [
+        {
+          "match": "`\\s*([a-zA-Z0-9-_./]+)\\s*([a-zA-Z0-9-_./]*)`",
+          "captures": {
+            "0": {
+              "name": "punctuation.definition.string.terminal"
+            },
+            "1": {
+              "name": "entity.name.function.terminal"
+            },
+            "2": {
+              "name": "string.terminal"
+            }
+          }
+        }
+      ]
+    },
+    "signal": {
+      "patterns": [
+        {
+          "match": "^\\s*\\^[CZ]\\s*$",
+          "name": "message.error.terminal"
+        }
+      ]
+    }
+  }
+}

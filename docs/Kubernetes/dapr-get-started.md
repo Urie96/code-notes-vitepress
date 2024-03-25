@@ -15,7 +15,7 @@ tags: [Kubernetes, Microservice]
 
 [官方文档](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/)
 
-```zsh
+```terminal
 $ wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
 Getting the latest Dapr CLI...
 Your system is linux_amd64
@@ -78,7 +78,7 @@ spec:
           image: traefik/whoami
 ```
 
-```zsh
+```terminal
 $ k apply -f deployment.yml
 deployment.apps/whoami-app configured
 $ k get po -o wide

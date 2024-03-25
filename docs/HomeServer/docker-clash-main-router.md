@@ -33,7 +33,7 @@ node4 <-- node6
 
 给 LAN 网卡配置不同网段的 IP 192.168.2.1
 
-```zsh
+```terminal
 $ sudo route -n # route命令用于控制一个IP包应该传递给谁
 Kernel IP routing table
 Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
@@ -65,7 +65,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 
 这时候 LAN 侧网卡可以连接电脑进行测试，需要手动配置电脑的 IP 和子网掩码在同一网段`192.168.2.2/24`，网关为`192.168.2.1`，然后测试一下：
 
-```zsh
+```terminal
 $ ping 192.168.2.1 # 可以通主路由LAN网口
 PING 192.168.2.1 (192.168.2.1) 56(84) bytes of data.
 64 bytes from 192.168.2.1: icmp_seq=1 ttl=64 time=0.131 ms
@@ -79,7 +79,7 @@ $ ping 192.168.1.1 # 但是不能通光猫
 
 所以需要再给光猫加路由表，ssh 连接光猫（下面是脑补的，因为没找到光猫超级密码，连不了 ssh）：
 
-```zsh
+```terminal
 $ route add -net 192.168.2.0 netmask 255.255.255.0 gw 192.168.1.7
 $ # 让光猫把192.168.2.0/24网段的包都发给主路由
 ```
@@ -118,7 +118,7 @@ endif
 
 1. **DNAT** 可以作为一种端口映射，比如把路由器的 `8080` 端口映射到下游`192.168.2.2`的`8443`端口上，外网请求主路由的 `8080` 就等于请求内部的`192.168.1.2:8443`；
 
-```zsh
+```terminal
 $ sudo iptables -t nat -I PREROUTING -d 192.168.1.2 -p tcp --dport 8080 -j DNAT --to-destination 192.168.2.2:8443
 ```
 
@@ -129,7 +129,7 @@ $ sudo iptables -t nat -I PREROUTING -d 192.168.1.2 -p tcp --dport 8080 -j DNAT 
 
 只需要在主路由的出口处配置一下 **SNAT** 就能实现：
 
-```zsh
+```terminal
 $ sudo iptables -t nat -I POSTROUTING -s 192.168.2.0/24 -o enp3s0 -j MASQUERADE
 ```
 
@@ -141,7 +141,7 @@ $ sudo iptables -t nat -I POSTROUTING -s 192.168.2.0/24 -o enp3s0 -j MASQUERADE
 
 如果要配置主路由的 LAN 侧请求走代理，可以给 nat 表的 PREROUTING 链加规则：
 
-```zsh
+```terminal
 $ sudo iptables -t nat -I PREROUTING -i enp4s0 -j CLASH
 $ # 配置enp4s0网卡进来的包走CLASH链
 ```
@@ -150,16 +150,15 @@ $ # 配置enp4s0网卡进来的包走CLASH链
 > 1. 配置主路由本机走代理：
 >
 > - Dockerfile 里添加一行`USER 0:2023`，以帮助 iptables 区分 clash 的出流量。
->
 > - 启动脚本`iptables.sh`添加一行：
 >
-> ```zsh
+> ```terminal
 > $ iptables -t nat -A OUTPUT -p tcp -m owner ! --gid-owner 2023 -j CLASH # 除了clash的出流量，都转发到CLASH链
 > ```
 >
 > 2. 避免直接请求透明代理端口导致流量无限回环打满 CPU：
 >
-> ```zsh
+> ```terminal
 > $ iptables -A OUTPUT -d 192.168.1.7 -p tcp --dport 7892 -m owner --gid-owner 2023 -j REJECT
 > ```
 
@@ -189,7 +188,7 @@ subnet 192.168.2.0 netmask 255.255.255.0 {
 
 启动 `isc-dhcp-server`：
 
-```zsh
+```terminal
 $ sudo dpkg-reconfigure isc-dhcp-server
 # 在弹出的UI中输入LAN侧网卡enp4s0并确定，这会写入/etc/default/isc-dhcp-server
 # 启动后如果没有消息，那就是正常了

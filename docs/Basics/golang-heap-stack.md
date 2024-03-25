@@ -34,7 +34,7 @@ int main() {
 }
 ```
 
-```zsh
+```terminal
 $ gcc tmp.c -o tmp
 tmp.c:6:11: warning: address of stack memory associated with local variable 'a' returned [-Wreturn-stack-address]
   return &a;
@@ -71,7 +71,7 @@ int main() {
 }
 ```
 
-```zsh
+```terminal
 $ gcc tmp1.c -o tmp1
 $ ./tmp1
 b is 1
@@ -95,7 +95,7 @@ func f() *int {
 }
 ```
 
-```zsh
+```terminal
 $ go tool compile -m tmp.go
 tmp.go:3:6: can inline f
 tmp.go:4:2: moved to heap: a # 因为返回值需要&a，返回之后栈就没了，所以a得在堆中分配
@@ -119,7 +119,7 @@ func setG(c *int) {
 }
 ```
 
-```zsh
+```terminal
 $ go tool compile -m tmp1.go
 tmp1.go:10:6: can inline setG1
 tmp1.go:5:6: can inline f
@@ -147,7 +147,7 @@ func setG(c *int) {
 }
 ```
 
-```zsh
+```terminal
 $ go tool compile -m tmp2.go
 tmp2.go:10:6: can inline setG
 tmp2.go:5:6: can inline f

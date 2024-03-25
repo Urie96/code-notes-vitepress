@@ -74,7 +74,7 @@ systemctl enable kubelet && systemctl start kubelet
 
 ### Master 节点
 
-```zsh
+```terminal
 $ echo "1" >/proc/sys/net/bridge/bridge-nf-call-iptables
 $ swapoff -a # 禁用交换分区，不然后续安装会报错
 $ kubeadm init
@@ -119,7 +119,7 @@ kube-scheduler-master.k8s                  1/1     Running   0          3m59s
 
 ### Node1 节点与 Node2 节点
 
-```zsh
+```terminal
 $ echo "1" >/proc/sys/net/bridge/bridge-nf-call-iptables
 $ echo "1" >/proc/sys/net/ipv4/ip_forward
 $ kubeadm join 10.79.41.23:6443 --token lg22bk.m3x8yob550dy5qct \
@@ -128,7 +128,7 @@ $ kubeadm join 10.79.41.23:6443 --token lg22bk.m3x8yob550dy5qct \
 
 ### 宿主机
 
-```zsh
+```terminal
 $ scp root@master.k8s:/etc/kubernetes/admin.conf ~/.kube/config
 $ kubectl get nodes
 NAME         STATUS   ROLES                  AGE   VERSION

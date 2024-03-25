@@ -65,7 +65,7 @@ docker push devbox.sweetlove.top:5000/hello-server:latest
 
 宿主机直接使用命令行创建，并尝试访问：
 
-```zsh
+```terminal
 $ kubectl run simple-server --image=devbox.sweetlove.top:5000/hello-server # 节点会自动从私有仓库拉取镜像
 pod/simple-server created
 $ kubectl get po -o wide

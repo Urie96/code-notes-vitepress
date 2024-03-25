@@ -26,7 +26,7 @@ Chrome 切换标签页的默认快捷键是 <kbd>Ctrl</kbd>+<kbd>Tab</kbd>，如
 
 通过`defaults`命令赋值 key-value 可以修改 mac 系统中几乎所有的系统配置，脚本修改的优势在于可以快捷地在多台电脑之间同步配置。
 
-```zsh
+```terminal
 $ defaults write com.apple.universalaccess reduceMotion -int 1 # 打开“减少动画”开关
 $ defaults read com.apple.universalaccess reduceMotion # 读取配置
 1
@@ -36,7 +36,7 @@ $ defaults read com.apple.universalaccess reduceMotion # 读取配置
 
 下面是如何查找系统配置所对应的 defaults 配置项：
 
-```zsh
+```terminal
 $ git clone git@github.com:yannbertrand/macos-defaults.git
 $ cd macos-defaults/
 $ bash diff.sh
@@ -76,7 +76,7 @@ $ git --no-pager diff --no-index diffs/mytest/host-old.plist diffs/mytest/host-n
 
 可以看到 Chrome 快捷键的配置项的 key 是 NSUserKeyEquivalents，再执行命令查找域：
 
-```zsh
+```terminal
 $ defaults find NSUserKeyEquivalents
 Found 1 keys in domain 'com.google.Chrome': {
     NSUserKeyEquivalents =     {
@@ -95,7 +95,7 @@ Type is dictionary
 
 到目前拿到了配置项的域（com.google.Chrome）、key（NSUserKeyEquivalents）以及 value 的格式，可以通过命令来修改了：
 
-```zsh
+```terminal
 $ defaults write com.google.Chrome NSUserKeyEquivalents -dict \
   "选择上一个标签" "^j" \
   "选择下一个标签" "^l"
@@ -105,7 +105,7 @@ $ defaults write com.google.Chrome NSUserKeyEquivalents -dict \
 
 然后查看系统设置显示修改成功了，但是 Chrome 没有生效，通过 defaults 命令的修改需要重启 App 才能生效：
 
-```zsh
+```terminal
 $ killall "Google Chrome"
 ```
 

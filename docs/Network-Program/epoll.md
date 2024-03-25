@@ -18,7 +18,7 @@ epoll 解决了这两个问题，可以将具有新事件的 fd 放在单独的�
 由于 epoll 出来的比较晚（2002 年），MacOS 采用的是 kqueue，内核并没有实现 epoll。
 只有借助 Docker Daemon 的内核，在 gcc 容器中执行代码。命令如下：
 
-```zsh
+```terminal
 $ docker run --rm -it -v "$PWD:/home" -p 8088:8088 gcc:10.3.0 bash # ads
 root@7b30039f4824:/$ cd /home
 root@7b30039f4824:/$
@@ -99,7 +99,7 @@ int main(int argc, char **argv) {
 
 ::: row
 
-```zsh
+```terminal
 $ ./epoll-et 8088
 listen port: 8088
 
@@ -109,7 +109,7 @@ epoll_wait return
 ... # 一直持续
 ```
 
-```zsh
+```terminal
 $
 $
 $ nc localhost 8088
@@ -137,7 +137,7 @@ int epoll_ctl_add(int ep_fd, int listen_fd) {
 
 ::: row
 
-```zsh
+```terminal
 $ ./epoll-et 8088
 listen port: 8088
 
@@ -147,7 +147,7 @@ epoll_wait return
 epoll_wait return
 ```
 
-```zsh
+```terminal
 $
 $
 $ nc localhost 8088
@@ -179,7 +179,7 @@ int main(int argc, char **argv) {
 }
 ```
 
-```zsh
+```terminal
 $ ./nonlock 8084
 listen port: 8084
 accept: Resource temporarily unavailable # accept()只报错不阻塞

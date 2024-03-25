@@ -14,7 +14,7 @@ tags: [Kubernetes]
 
 ## 安装 K3S
 
-```zsh
+```terminal
 $ which kubectl && rm `which kubectl`
 $ which crictl && rm `which crictl`
 $ which ctr && rm `which ctr` # 先删除原有的这些命令，安装k3s的时候会生成这些命令的链接
@@ -45,7 +45,7 @@ lubui.com   Ready    control-plane,master   17s   v1.24.3+k3s1
 
 1. 由于 sudo 的环境变量存在 KUBECONFIG 导致的报错
 
-```zsh
+```terminal
 $ sudo kubectl get po
 W0810 13:24:11.296386    6586 loader.go:221] Config not found: /etc/kubernetes/admin.conf
 The connection to the server localhost:8080 was refused - did you specify the right host or port?
@@ -55,7 +55,7 @@ KUBECONFIG=/etc/kubernetes/admin.conf
 
 2. 有些命令需要读取用户目录下 k8s 的配置文件，k3s 默认情况下没有这个文件，需要在启动 k3s 的地方添加最后两行参数：
 
-```zsh
+```terminal
 $ cat /etc/systemd/system/k3s.service
 [Unit]
 Description=Lightweight Kubernetes
@@ -100,7 +100,7 @@ $ ls -alp ~/.kube/config
 
 [Lens](https://github.com/lensapp/lens)是一个桌面应用，通过与 k8s api 交互，可以查看 k8s 集群的详细信息。
 
-```zsh{6}
+```terminal{6}
 $ sudo kubectl config view --minify --raw
 apiVersion: v1
 clusters:
@@ -131,7 +131,7 @@ users:
 
 由于 traefik 是 k3s 默认部署的（当然也可以在 init k3s 集群时传参数来禁用它），如果想修改 traefik 启动命令的参数，可以直接创建一个文件：
 
-```zsh
+```terminal
 $ sudo ls /var/lib/rancher/k3s/server/manifests # 这里放了k3s默认部署的组件
 ccm.yaml  coredns.yaml  local-storage.yaml  metrics-server  rolebindings.yaml  traefik.yaml
 $ sudo cat /var/lib/rancher/k3s/server/manifests/traefik.yaml # traefik的部署配置，改这里没用，每次启动会被覆盖

@@ -14,7 +14,7 @@ tags: [Kubernetes, Linux]
 
 1. 主节点运行`sudo kubeadm init`在拉取镜像时会报错，因为 docker 没有配置代理，无法拉取 k8s 相关的镜像。给 docker 添加代理：
 
-```zsh
+```terminal
 $ sudo mkdir -p /etc/systemd/system/docker.service.d
 $ sudo /etc/systemd/system/docker.service.d/http-proxy.conf
 $ cat <<EOF | sudo tee /etc/systemd/system/docker.service.d/http-proxy.conf
@@ -30,7 +30,7 @@ No Proxy: localhost,127.0.0.1
 
 2. 主节点运行`sudo kubeadm init`报错，运行`journalctl -xeu kubelet`查看日志发现是因为 docker 的 Cgroup 驱动是 cgroupfs，而 k8s 官方推荐使用 systemd。修改 docker Cgroup 驱动：
 
-```zsh
+```terminal
 $ cat <<EOF | sudo tee /etc/docker/daemon.json
 {
   "exec-opts": ["native.cgroupdriver=systemd"]
@@ -44,7 +44,7 @@ Cgroup Version: 1
 
 3. 主节点运行`sudo kubeadm init`成功，但`kubectl get po --all-namespaces`显示 coredns 一直是 pending，官网文档说这是因为需要没有安装容器网络，安装一个简单的网络插件 Flannel：
 
-```zsh
+```terminal
 $ sudo kubeadm reset # 清理之前安装的集群
 $ sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 $ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
@@ -62,7 +62,7 @@ $ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Docum
 6. 工作节点 join 成功，`kubectl get node`显示工作节点 not ready，配置 docker proxy。
 7. 集群内节点无法直接请求其他节点 Pod 的 IP，可以通过`kubectl port-forward`命令在主节点设置端口转发：
 
-```zsh
+```terminal
 $ kubectl get no # 当前在lubui.com主节点
 NAME            STATUS   ROLES                  AGE     VERSION
 lubui.com       Ready    control-plane,master   2d23h   v1.23.0
@@ -81,7 +81,7 @@ Forwarding from 0.0.0.0:8888 -> 8080
 
 8. Pod 不在 master 节点部署。因为 master 节点默认添加了 taint，此标记使 pod 不在该节点调度。删除 taint：
 
-```zsh
+```terminal
 $ kubectl describe node lubui.com |grep Taints
 Taints:             node-role.kubernetes.io/master:NoSchedule
 $ kubectl taint nodes --all node-role.kubernetes.io/master-

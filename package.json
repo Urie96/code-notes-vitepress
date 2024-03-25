@@ -1,9 +1,22 @@
 {
-  "name": "code-notes-vitepress",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "杨锐 <lubui.com@gmail.com>",
-  "license": "MIT",
+  "dependencies": {
+    "valine": "^1.5.1"
+  },
+  "devDependencies": {
+    "brotli": "^1.3.3",
+    "chalk": "^5.3.0",
+    "fast-glob": "^3.3.2",
+    "gray-matter": "^4.0.3",
+    "markdown-it-container": "^4.0.0",
+    "mini-svg-data-uri": "^1.4.4",
+    "sitemap": "^7.1.1",
+    "stylus": "^0.63.0",
+    "svgo": "^3.2.0",
+    "vitepress": "^1.0.1",
+    "vue": "^3.4.21",
+    "workbox-build": "^7.0.0",
+    "zlib": "^1.0.5"
+  },
   "scripts": {
     "dev": "vitepress dev docs --host",
     "build": "vitepress build docs",
@@ -12,25 +25,5 @@
     "zip": "node docs/.vitepress/zip.mjs",
     "lint": "rome check . --apply-suggested && rome check .",
     "fmt": "rome format . --write"
-  },
-  "devDependencies": {
-    "@types/markdown-it-container": "^2.0.5",
-    "@types/node": "^18.6.2",
-    "brotli": "^1.3.3",
-    "chalk": "^5.0.1",
-    "fast-glob": "^3.2.11",
-    "gray-matter": "^4.0.3",
-    "markdown-it-container": "^3.0.0",
-    "mini-svg-data-uri": "^1.4.4",
-    "sitemap": "^7.1.1",
-    "stylus": "^0.58.1",
-    "svgo": "^3.0.0",
-    "vitepress": "^1.0.0-alpha.4",
-    "workbox-build": "^6.5.4",
-    "zlib": "^1.0.5"
-  },
-  "dependencies": {
-    "valine": "^1.5.1",
-    "vue": "^3.2.47"
   }
 }

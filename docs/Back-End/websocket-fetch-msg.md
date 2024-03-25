@@ -15,7 +15,7 @@ tags: [websocket]
 
 **目录结构：**
 
-```zsh
+```terminal
 $ tree
 .
 ├── 1.key
@@ -74,7 +74,7 @@ wss.on('connection', (conn) => {
 
 **启动服务端并使用浏览器访问`https://sweetlove.top:3000`：**
 
-```zsh
+```terminal
 $ npm i ws && node index.js
 connected
 0
@@ -91,7 +91,7 @@ connected
 
 **安装并启动：**
 
-```zsh
+```terminal
 $ pip install mitmproxy
 $ mitmproxy
 ```

@@ -90,7 +90,7 @@ ExecStart=/usr/local/bin/clash -d /etc/clash
 WantedBy=multi-user.target
 ```
 
-```zsh
+```terminal
 $ sudo systemctl daemon-reload
 $ sudo systemctl start clash
 $ sudo systemctl enable clash
@@ -117,7 +117,7 @@ The document has moved
 
 配置 iptables 配置开机执行，避免重启失效：
 
-```zsh
+```terminal
 $ cat <<EOF | sudo tee -a /etc/rc.local
 iptables -t nat -N CLASH # 给nat表新增一个名为 CLASH 的链
 iptables -t nat -A CLASH -d 10.0.0.0/8 -j RETURN

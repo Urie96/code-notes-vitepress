@@ -61,7 +61,7 @@ func main() {
 
 ::: row
 
-```zsh
+```terminal
 $
 $ go run main.go
 
@@ -73,7 +73,7 @@ $ go run main.go
 2021/07/08 10:46:01 event: "/tmp/foo": REMOVE
 ```
 
-```zsh
+```terminal
 $ touch /tmp/foo
 
 $ echo hello >> /tmp/foo
@@ -127,7 +127,7 @@ func main() {
 
 **测试：**
 
-```zsh
+```terminal
 $ echo ab > /tmp/foo
 $ go run main.go
 read: a
@@ -208,7 +208,7 @@ func (f FollowedFile) Close() error { // 调用Close后，Reader函数永远返�
 
 ::: row
 
-```zsh
+```terminal
 $
 $ go run main.go
 hello
@@ -216,7 +216,7 @@ hello
 world
 ```
 
-```zsh
+```terminal
 $ echo hello > /tmp/foo
 
 
@@ -249,7 +249,7 @@ func main() {
 
 **测试：**
 
-```zsh
+```terminal
 $ curl -v localhost:8080
 *   Trying ::1...
 * TCP_NODELAY set
@@ -284,7 +284,7 @@ rw.Write([]byte("hello, world\n"))
 
 **测试：**
 
-```zsh
+```terminal
 $ curl -v localhost:8080
 *   Trying ::1...
 * TCP_NODELAY set
@@ -427,7 +427,7 @@ func (f *NopFlusher) Flush() {}
 
 ::: row
 
-```zsh
+```terminal
 $ curl localhost:8080
 
 hello
@@ -435,7 +435,7 @@ hello
 world
 ```
 
-```zsh
+```terminal
 $
 $ echo hello >> /tmp/foo
 $

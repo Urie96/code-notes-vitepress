@@ -30,7 +30,7 @@ USB 连接板子，执行下面看看是否有输出：
 
 ::: code-group
 
-```zsh [Linux]
+```terminal [Linux]
 $ ls /dev/ttyUSB* # 可能一开始没有输出，需要添加用户权限
 $ sudo usermod -a -G uucp $USER # Arch Linux
 $ sudo usermod -a -G dialout $USER # not Arch Linux
@@ -39,7 +39,7 @@ $ ls /dev/ttyUSB*
 /dev/ttyUSB0
 ```
 
-```zsh [Mac OS]
+```terminal [Mac OS]
 $ ls /dev/cu.*
 ```
 
@@ -53,7 +53,7 @@ $ ls /dev/cu.*
 
 [esptool](https://github.com/espressif/esptool)用于与 ESP8266 和 ESP32 系列芯片中的 ROM 引导加载程序进行通信，可以将二进制数据写入闪存。
 
-```zsh
+```terminal
 $ pipx install esptool
 $ esptool.py --port /dev/ttyUSB0 erase_flash # 擦除flash
 $ esptool.py --chip esp32 --port /dev/ttyUSB0 \
@@ -64,7 +64,7 @@ write_flash -z 0x1000 esp32-20230426-v1.20.0.bin # 烧写MicroPython固件
 
 安装[picocom](https://github.com/npat-efault/picocom)
 
-```zsh
+```terminal
 $ mkdir -p ~/install && cd ~/install
 $ git clone https://github.com/npat-efault/picocom.git
 $ cd picocom
@@ -76,7 +76,7 @@ $ cp picocom ~/bin
 
 进入开发板的 Python 交互命令行：
 
-```zsh
+```terminal
 $ picocom -b 115200 /dev/ttyUSB0
 picocom v3.2a
 
@@ -169,7 +169,7 @@ VS Code 默认是用的电脑上的 Python 解释器及对应的库代码，所�
 
 安装[Micropy CLI](https://github.com/BradenM/micropy-cli)与环境初始化：
 
-```zsh
+```terminal
 $ pipx install micropy-cli
   installed package micropy-cli 4.2.1, installed using Python 3.11.3
   These apps are now globally available

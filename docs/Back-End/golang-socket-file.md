@@ -68,7 +68,7 @@ func main() {
 
 ::: row
 
-```zsh
+```terminal
 $ go run server.go
 
 hello
@@ -78,7 +78,7 @@ world
 hello2
 ```
 
-```zsh
+```terminal
 $ go run client.go
 hello # 标准输入
 resp: hello
@@ -87,7 +87,7 @@ resp: world
 # 客户端1未断开连接
 ```
 
-```zsh
+```terminal
 $
 $
 $
@@ -176,7 +176,7 @@ func main() {
 
 ::: row
 
-```zsh
+```terminal
 $  go run http-server.go
 
 POST /test?page=1&size=2 HTTP/1.1
@@ -188,7 +188,7 @@ Accept-Encoding: gzip
 hello, world
 ```
 
-```zsh
+```terminal
 $
 $ go run http-client.go
 ok
