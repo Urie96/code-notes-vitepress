@@ -99,7 +99,7 @@ const { theme } = useData<ReadonlyThemeConfig>();
       line-height 36px
       text-align center
       list-style none
-      transition transform .3s
+      transition transform .3s !important
       &:hover {
         transform scale(1.08)
       }

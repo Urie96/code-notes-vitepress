@@ -42,7 +42,7 @@
               v-for="(item, index) in theme.pageData.categories"
               :key="item.name"
             >
-              <a @click="router.go('/categories/?category=' + item.name)">
+              <a @click="router.go('/categories/#' + item.name)">
                 <span class="category-name">{{ item.name }}</span>
                 <span
                   class="post-num"
@@ -179,7 +179,7 @@ ul
       position sticky;
       top 70px
       overflow hidden
-      transition all .3s
+      transition all .3s !important
       margin-left 15px
       flex 0 0 300px
       height auto
@@ -205,7 +205,7 @@ ul
         .category-item {
           margin-bottom .4rem
           padding: .4rem .8rem;
-          transition: all .5s
+          transition: all .5s !important
           border-radius $borderRadius
           box-shadow var(--box-shadow)
           background-color var(--background-color)

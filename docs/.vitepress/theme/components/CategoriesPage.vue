@@ -9,7 +9,7 @@
         v-show="item.num"
         :key="item.name"
       >
-        <a @click="router.go('/categories/?category=' + item.name)">
+        <a @click="router.go('/categories/#' + item.name)">
           <span class="category-name">{{ item.name }}</span>
           <span class="post-num" :style="{ backgroundColor: getOneColor() }">
             {{ item.num }}
@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useData, useRouter, inBrowser } from 'vitepress';
 import { getOneColor } from '../utils';
 import NoteAbstract from './NoteAbstract.vue';
@@ -39,16 +39,24 @@ const currentCategory = ref(theme.value?.pageData?.categories?.[0]?.name);
 
 const router = useRouter();
 
+const onHashChange = () => {
+  const category = decodeURIComponent(location.hash?.substring?.(1) || '');
+  console.log(category);
+  if (category) {
+    currentCategory.value = category;
+  }
+};
+
 onMounted(() => {
   if (inBrowser) {
-    const init = () => {
-      const category = new URL(location.href).searchParams.get('category');
-      if (category) {
-        currentCategory.value = category;
-      }
-    };
-    init();
-    watch(router.route, init);
+    onHashChange();
+    window.addEventListener('hashchange', onHashChange);
+  }
+});
+
+onBeforeUnmount(() => {
+  if (inBrowser) {
+    window.removeEventListener('hashchange', onHashChange);
   }
 });
 
@@ -83,7 +91,7 @@ const paginationChange = () => {
       border-radius: $borderRadius
       font-size: 13px;
       box-shadow var(--box-shadow)
-      transition: all .5s
+      transition: all .5s !important
       background-color var(--background-color)
       &:hover, &.active {
         background $accentColor

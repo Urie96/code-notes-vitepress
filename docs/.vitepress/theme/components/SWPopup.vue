@@ -102,7 +102,7 @@ register('/service-worker.js', {
     border-radius: 0.75rem;
 
     svg {
-      animation: rotate 3s ease infinite;
+      animation: rotate 3s ease infinite !important;
       width: 1.2em;
       height: 1.2em;
       margin: 0.15em;

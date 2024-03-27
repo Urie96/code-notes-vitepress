@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import TagList from './TagList.vue';
 import NoteAbstract from './NoteAbstract.vue';
-import { useData, inBrowser, useRoute } from 'vitepress';
+import { useData, inBrowser } from 'vitepress';
 
 const { theme } = useData<ReadonlyThemeConfig>();
 
@@ -34,21 +34,26 @@ const tags = [
   ...theme.value.pageData.tags,
 ];
 
-const currentTag = ref('');
+const currentTag = ref('全部');
 
-const route = useRoute();
+const onHashChange = () => {
+  const tag = decodeURIComponent(location.hash?.substring?.(1) || '');
+  if (tag) {
+    currentTag.value = tag;
+  }
+};
 
 onMounted(() => {
   if (inBrowser) {
     // 服务端渲染不选标签
-    currentTag.value =
-      new URLSearchParams(location.search).get('tag') || '全部';
-    watch(route, () => {
-      const tag = new URLSearchParams(location.search).get('tag');
-      if (tag) {
-        currentTag.value = tag;
-      }
-    });
+    onHashChange();
+    window.addEventListener('hashchange', onHashChange);
+  }
+});
+
+onBeforeUnmount(() => {
+  if (inBrowser) {
+    window.removeEventListener('hashchange', onHashChange);
   }
 });
 

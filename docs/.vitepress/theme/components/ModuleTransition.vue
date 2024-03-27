@@ -30,7 +30,7 @@ const props = defineProps({
 });
 
 const setStyle = (items: any) => {
-  items.style.transition = `transform ${props.duration}s ease-in-out ${props.delay}s, opacity ${props.duration}s ease-in-out ${props.delay}s`;
+  items.style.transition = `transform ${props.duration}s ease-in-out ${props.delay}s, opacity ${props.duration}s ease-in-out ${props.delay}s !important`;
   items.style.transform = props.transform[0];
   items.style.opacity = 0;
 };

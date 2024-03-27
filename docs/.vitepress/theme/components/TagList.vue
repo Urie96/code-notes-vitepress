@@ -6,7 +6,7 @@
       :key="item.name"
       :class="{ active: item.name == currentTag }"
       :style="{ backgroundColor: getOneColor() }"
-      @click="router.go('/tags/?tag=' + item.name)"
+      @click="router.go('/tags/#' + item.name)"
     >
       {{ item.name }}
     </span>
@@ -47,7 +47,7 @@ const props = defineProps({
     line-height 13px
     font-size: 13px;
     box-shadow var(--box-shadow)
-    transition: all .5s
+    transition: all .5s !important
     &:hover
       transform scale(1.04)
     &.active

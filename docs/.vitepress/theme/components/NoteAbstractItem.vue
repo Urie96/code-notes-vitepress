@@ -43,7 +43,7 @@ const props = defineProps({
   border-radius: $borderRadius
   box-shadow: var(--box-shadow);
   box-sizing: border-box;
-  transition all .3s
+  transition all .3s !important
   background-color var(--background-color)
   cursor: pointer;
   > * {
@@ -80,7 +80,7 @@ const props = defineProps({
       visibility: hidden;
       -webkit-transform: scaleX(0);
       transform: scaleX(0);
-      transition: .3s ease-in-out;
+      transition: .3s ease-in-out !important;
     &:hover a
       color $accentColor
     &:hover:after

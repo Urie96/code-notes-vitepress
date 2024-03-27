@@ -23,7 +23,7 @@
         :key="subIndex"
         class="tag-item"
         :class="{ active: currentTag == subItem }"
-        @click.stop="router.go('/categories/?category=' + subItem)"
+        @click.stop="router.go('/categories/#' + subItem)"
         >{{ subItem }}</span
       >
     </reco-icon>
@@ -33,7 +33,7 @@
         :key="subIndex"
         class="tag-item"
         :class="{ active: currentTag == subItem }"
-        @click.stop="router.go('/tags/?tag=' + subItem)"
+        @click.stop="router.go('/tags/#' + subItem)"
         >{{ subItem }}</span
       >
     </reco-icon>

@@ -1,7 +1,7 @@
 ---
 title: Mac 添加 App 快捷键以及用 Bash 修改 Mac 系统设置
 date: 2023-10-17 11:25:03 GMT+0800
-categories: [其他]
+categories: [生产力]
 tags: [Mac]
 ---
 
