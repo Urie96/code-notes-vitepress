@@ -1,0 +1,19 @@
+services:
+  blog:
+    container_name: blog
+    build: .
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Asia/Shanghai
+      VIRTUAL_HOST: blog.home.lubui.com
+      VIRTUAL_PORT: 8099
+    network_mode: host
+    restart: unless-stopped
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - homepage.group=个人网站
+      - homepage.name=我的笔记
+      - homepage.icon=https://blog.home.lubui.com:8443/favicon.svg
+      - homepage.href=https://blog.home.lubui.com:8443/
+      - homepage.description=记录一些技术相关的问题

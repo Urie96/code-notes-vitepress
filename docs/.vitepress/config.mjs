@@ -127,7 +127,7 @@ export default async () => {
           text: '分类',
           items: pageData.categories.map((v) => ({
             text: v.name,
-            link: `/categories/?category=${v.name}`,
+            link: `/categories/#${v.name}`,
           })),
           activeMatch: '/categories/.*',
         },

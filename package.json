@@ -1,5 +1,7 @@
 {
+  "type": "module",
   "dependencies": {
+    "asciinema-player": "^3.7.1",
     "valine": "^1.5.1"
   },
   "devDependencies": {
@@ -21,7 +23,7 @@
     "dev": "vitepress dev docs --host",
     "build": "vitepress build docs",
     "serve": "vitepress serve docs",
-    "sw": "node docs/.vitepress/workbox-build.js",
+    "sw": "node docs/.vitepress/workbox-build.cjs",
     "zip": "node docs/.vitepress/zip.mjs",
     "lint": "rome check . --apply-suggested && rome check .",
     "fmt": "rome format . --write"

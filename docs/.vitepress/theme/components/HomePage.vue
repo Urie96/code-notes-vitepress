@@ -203,6 +203,7 @@ ul
         list-style none
         padding-left 0
         .category-item {
+          cursor: pointer;
           margin-bottom .4rem
           padding: .4rem .8rem;
           transition: all .5s !important

@@ -1,14 +1,16 @@
 .PHONY: image
 
-image:
+build:
 	bun run build
-	bun run sw
-	bun docs/.vitepress/gen-sitemap.mjs
 	bun run zip
+
+image:
+	# bun run sw
+	# bun docs/.vitepress/gen-sitemap.mjs
 	docker build -t hub.lubui.com/code-notes-vitepress .
 	docker push hub.lubui.com/code-notes-vitepress
 
-deploy:
+deploy: image
 	ssh lubui.com sudo kubectl scale --replicas=0 deployment code-notes-vitepress
 	ssh lubui.com sudo kubectl scale --replicas=1 deployment code-notes-vitepress
 
@@ -17,6 +19,10 @@ search:
 	cd /home/ubuntu/workplace/py/docsearch-scraper && pipenv run ./docsearch run /tmp/config.json
 
 upload:
-	bun run build
-	bun run sw
-	qshell qupload2 --src-dir=/home/ubuntu/workplace/js/code-notes-vitepress/dist --thread-count=10 --overwrite --bucket=lubui-com
+	# bun run build
+	# bun run sw
+	# coscmd -c ~/.config/tencent-cloud/.cos.conf -b webpage-1308451905 -r ap-beijing upload -r /dist code-notes
+	qshell qupload2 --src-dir=./dist --thread-count=10 --overwrite --bucket=lubui-code-notes
+	# echo https://huyue.lubui.com/index.html >._list
+	# qshell cdnrefresh -i ._list
+	# rm ._list
