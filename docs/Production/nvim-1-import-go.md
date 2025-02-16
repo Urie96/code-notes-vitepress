@@ -1,6 +1,7 @@
 ---
 title: 自定义 Neovim（一）：浏览 Golang 所有可用包及其导出函数
 date: 2024-07-23 19:18:22 GMT+0800
+disable: true
 categories: [生产力]
 tags: [Golang, Neovim]
 ---

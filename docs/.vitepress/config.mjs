@@ -15,7 +15,7 @@ export default async () => {
     title: '我的笔记',
     description: ' ',
     lang: 'zh-CN',
-    lastUpdated: true,
+    lastUpdated: false,
     markdown: {
       theme: {
         light: 'vitesse-light',
@@ -280,3 +280,4 @@ function algolia() {
     placeholder: '搜索文档',
   };
 }
+
