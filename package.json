@@ -8,7 +8,6 @@
     "valine": "^1.5.3"
   },
   "devDependencies": {
-    "brotli": "^1.3.3",
     "chalk": "^5.4.1",
     "fast-glob": "^3.3.3",
     "gray-matter": "^4.0.3",
@@ -17,19 +16,15 @@
     "sitemap": "^7.1.2",
     "stylus": "^0.63.0",
     "svgo": "^3.3.2",
-    "vitepress": "^1.6.3",
+    "vitepress": "~1.0.1",
     "vue": "^3.5.13",
-    "workbox-build": "^7.3.0",
-    "zlib": "^1.0.5"
+    "workbox-build": "^7.3.0"
   },
   "scripts": {
     "dev": "vitepress dev docs --host",
     "build": "vitepress build docs",
     "serve": "vitepress serve docs",
     "sw": "node docs/.vitepress/workbox-build.cjs",
-    "zip": "node docs/.vitepress/zip.mjs",
-    "lint": "rome check . --apply-suggested && rome check .",
-    "fmt": "rome format . --write"
+    "zip": "node docs/.vitepress/zip.mjs"
   }
 }
-
