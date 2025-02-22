@@ -2,7 +2,7 @@
 
 build:
 	bun run build
-	bun run zip
+	cd ./dist && fd -e js -e css -e html -e svg -e json -e cast -e txt --size +10k | xargs gzip --best -k
 
 image:
 	# bun run sw
@@ -22,7 +22,9 @@ upload:
 	# bun run build
 	# bun run sw
 	# coscmd -c ~/.config/tencent-cloud/.cos.conf -b webpage-1308451905 -r ap-beijing upload -r /dist code-notes
-	qshell qupload2 --src-dir=./dist --thread-count=10 --overwrite --bucket=lubui-code-notes
+	# qshell qupload2 --src-dir=./dist --thread-count=10 --overwrite --bucket=lubui-code-notes
 	# echo https://huyue.lubui.com/index.html >._list
 	# qshell cdnrefresh -i ._list
 	# rm ._list
+	rm -rf /var/lib/nginx/static/code-notes/*
+	cp -r ./dist/* /var/lib/nginx/static/code-notes/

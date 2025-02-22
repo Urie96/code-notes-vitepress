@@ -15,7 +15,7 @@ export default async () => {
     title: '我的笔记',
     description: ' ',
     lang: 'zh-CN',
-    lastUpdated: false,
+    lastUpdated: true,
     markdown: {
       theme: {
         light: 'vitesse-light',
@@ -54,15 +54,15 @@ export default async () => {
       ['link', { rel: 'mask-icon', href: '/favicon.svg', color: '#3eaf7c' }],
       ['meta', { name: 'msapplication-TileImage', content: '/favicon.svg' }],
       ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
-      [
-        'script',
-        {
-          async: '',
-          defer: '',
-          'data-website-id': '4471123b-b2d4-417d-aafe-30f93ef91a5b',
-          src: 'https://umami.lubui.com/umami.js',
-        },
-      ],
+      //[
+      //  'script',
+      //  {
+      //    async: '',
+      //    defer: '',
+      //    'data-website-id': '4471123b-b2d4-417d-aafe-30f93ef91a5b',
+      //    src: 'https://umami.lubui.com/umami.js',
+      //  },
+      //],
     ],
     themeConfig: {
       author: '杨锐',
@@ -137,16 +137,16 @@ export default async () => {
           text: '我的网页',
           items: [
             { text: 'HackBook', link: 'https://book.lubui.com' },
-            {
-              text: '美好的回忆',
-              link: 'https://photo.home.lubui.com:8443',
-            },
+            //{
+            //  text: '美好的回忆',
+            //  link: 'https://immich.lubui.com:8443',
+            //},
             {
               text: '家庭服务',
               link: 'https://home.lubui.com:8443',
             },
             {
-              text: '在一起计时器',
+              text: '在一起纪念',
               link: 'https://huyue.lubui.com',
             },
           ],
@@ -280,4 +280,3 @@ function algolia() {
     placeholder: '搜索文档',
   };
 }
-
