@@ -21,16 +21,6 @@
     "scope": "markdown",
     "body": "[$1]($2) $3"
   },
-  "tip": {
-    "prefix": "tip",
-    "scope": "markdown",
-    "body": "::: tip $1\n:::"
-  },
-  "abstract": {
-    "prefix": "abstract",
-    "scope": "markdown",
-    "body": "::: abstract $1\n:::"
-  },
   "group": {
     "prefix": "group",
     "scope": "markdown",
@@ -53,21 +43,6 @@
       ":::"
     ]
   },
-  "warning": {
-    "prefix": "warn",
-    "scope": "markdown",
-    "body": "::: warning $1\n:::"
-  },
-  "danger": {
-    "prefix": "danger",
-    "scope": "markdown",
-    "body": "::: danger $1\n:::"
-  },
-  "details": {
-    "prefix": "detail",
-    "scope": "markdown",
-    "body": "::: details $1\n:::"
-  },
   "more": {
     "prefix": "more",
     "scope": "markdown",
@@ -77,10 +52,5 @@
     "prefix": "badge",
     "scope": "markdown",
     "body": "<Badge text=\"$CURRENT_YEAR.$CURRENT_MONTH.${CURRENT_DATE}+\" />"
-  },
-  "b": {
-    "prefix": "b",
-    "scope": "markdown",
-    "body": "**$1**"
   }
 }

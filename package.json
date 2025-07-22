@@ -10,6 +10,7 @@
   "devDependencies": {
     "gray-matter": "^4.0.3",
     "markdown-it-container": "^4.0.0",
+    "markdown-it-mathjax3": "^4.3.2",
     "mini-svg-data-uri": "^1.4.4",
     "sitemap": "^7.1.2",
     "stylus": "^0.63.0",
